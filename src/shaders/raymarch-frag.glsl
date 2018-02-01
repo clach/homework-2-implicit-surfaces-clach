@@ -13,6 +13,11 @@ const float MIN_DIST = 0.0;
 const float MAX_DIST = 100.0;
 const float EPSILON = 0.0001;
 
+struct intersection {
+	float t;
+	vec3 normal;
+	vec3 color;
+};
 
 /**
  * Rotation matrix around the X axis.
@@ -183,6 +188,7 @@ float toasterBodySDF(vec3 p) {
 	float toasterMinus = boxSDF(p + vec3(0.0, 1.2, 0.0), vec3(1.4, 0.125, 2.1));
 	toaster = differenceSDF(toaster, toasterMinus);
 
+
 	float wheelHole1 = wheelHoleSDF(p + vec3(-1.0, 0.9, 0.9));
 	float wheelHole2 = wheelHoleSDF(p + vec3(-1.0, 0.9, -0.9));
 	float wheelHole3 = wheelHoleSDF(p + vec3(1.0, 0.9, 0.9));
@@ -197,13 +203,19 @@ float wheelSDF(vec3 p) {
 	return cylinderSDF(rotateY(1.5708) * p, 0.5, 0.5);
 }
 
-/**
- * Signed distance function describing the scene.
- * 
- * Absolute value of the return value indicates the distance to the surface.
- * Sign indicates whether the point is inside or outside the surface,
- * negative indicating inside.
- */
+float wheelTreadSDF(vec3 p) {
+	return cylinderSDF((rotateY(1.5708) * p) + vec3(0.9, 0.9, 0.0), 3.0, 0.05);
+}
+
+vec3 mod3(vec3 p, vec3 c) {
+	return vec3(mod(p.x, c.x), mod(p.y, c.y), mod(p.z, c.z));
+}
+
+float repeatWheelTreadSDF(vec3 p, vec3 c) {
+	vec3 q = mod3(p, c) - 0.5 * c;
+    return wheelTreadSDF(rotateX(0.1) * q);
+}
+
 float sceneSDF(vec3 p) {
 	float leverHandle = udRoundBox(p + vec3(0.0, -0.6, -2.15), vec3(0.2, 0.06, 0.05), 0.1);
 	
@@ -218,8 +230,16 @@ float sceneSDF(vec3 p) {
 	float wheelSpoke2 = cylinderSDF((rotateY(1.5708) * p) + vec3(-0.9, 0.9, 0.0), 2.7, 0.1);
 	toaster = unionSDF(toaster, unionSDF(wheelSpoke1, wheelSpoke2));
 
-	float wheel1 = wheelSDF(p + vec3(-1.0, 0.9, 0.9));
-	toaster = unionSDF(toaster, wheel1);
+	float wheel1 = wheelSDF(p + vec3(1.0, 0.9, 0.9));
+	float wheel2 = wheelSDF(p + vec3(-1.0, 0.9, -0.9));
+	float wheel3 = wheelSDF(p + vec3(-1.0, 0.9, 0.9));
+	float wheel4 = wheelSDF(p + vec3(1.0, 0.9, -0.9));
+
+	//float wheelTreads = repeatWheelTreadSDF(p, vec3(0.0, 2.0, 2.0));
+	//wheel1 = unionSDF(wheel1, wheelTreads);
+
+	float wheels = unionSDF(unionSDF(wheel1, wheel2), unionSDF(wheel3, wheel4));
+	toaster = unionSDF(toaster, wheels);
 
 	float toast1 = toastSDF(p + vec3(0.4, 0.0, 0.0));
 	float toast2 = toastSDF(p + vec3(-0.4, 0.0, 0.0));
@@ -377,7 +397,7 @@ void main() {
 	
 	vec3 viewDir = rayDirection(45.0, u_AspectRatio.xy, fragCoord);
     
-	vec3 eye = vec3(15.0, -10.0, 7.0);
+	vec3 eye = vec3(15.0, 10.0, 7.0);
     mat4 viewToWorld = viewMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     
