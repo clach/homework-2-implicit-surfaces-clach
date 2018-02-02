@@ -13,7 +13,9 @@ const float MIN_DIST = 0.0;
 const float MAX_DIST = 100.0;
 const float EPSILON = 0.0001;
 
-struct intersection {
+const vec3 eye = vec3(15.0, 10.0, 7.0);
+
+struct Intersection {
 	float t;
 	vec3 normal;
 	vec3 color;
@@ -66,6 +68,15 @@ float unionSDF(float distA, float distB) {
     return min(distA, distB);
 }
 
+/*
+float unionIntersection(Intersection distA, Intersection distB) {
+	Intersection i;
+	i.t = unionSDF(distA.t, distB.t);
+	i.normal =
+
+    return min(distA.t, distB.t);
+}*/
+
 float differenceSDF(float distA, float distB) {
     return max(distA, -distB);
 }
@@ -96,15 +107,53 @@ float smoothUnionSDF(float distA, float distB) {
 
 
 /**
- * Signed distance function for a sphere centered at the origin with radius 1.0;
+ * Signed distance function for a sphere centered at the origin with radius r
  */
-float sphereSDF(vec3 p) {
-    return length(p) - 1.0;
+float sphereSDF(vec3 p, float r) {
+	return length(p) - r;
+}
+
+Intersection sphereSDFIntersection(vec3 p, float r) {
+	Intersection i;
+	i.t = sphereSDF(p, r);
+	/*
+	i.normal = normalize(vec3(
+        sphereSDF(vec3(p.x + EPSILON, p.y, p.z)) - sphereSDF(vec3(p.x - EPSILON, p.y, p.z)),
+        sphereSDF(vec3(p.x, p.y + EPSILON, p.z)) - sphereSDF(vec3(p.x, p.y - EPSILON, p.z)),
+        sphereSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sphereSDF(vec3(p.x, p.y, p.z - EPSILON))));
+	*/
+	i.normal = cross(vec3(dFdx(p)), vec3(dFdy(p)));
+	vec3 K_a = (i.normal + vec3(1.0)) / 2.0;
+    vec3 K_d = K_a;
+    vec3 K_s = vec3(1.0, 1.0, 1.0);
+    float shininess = 10.0;
+    
+    i.color = (i.normal + 1.0) / 2.0;
+
+	return i;
 }
 
 float boxSDF(vec3 p, vec3 b) {
   vec3 d = abs(p) - b;
   return min(max(d.x,max(d.y,d.z)),0.0) + length(max(d,0.0));
+}
+
+Intersection boxSDFIntersection(vec3 p, vec3 b) {
+	Intersection i;
+	i.t = boxSDF(p, b);
+	i.normal = normalize(vec3(
+        boxSDF(vec3(p.x + EPSILON, p.y, p.z), b) - boxSDF(vec3(p.x - EPSILON, p.y, p.z), b),
+        boxSDF(vec3(p.x, p.y + EPSILON, p.z), b) - boxSDF(vec3(p.x, p.y - EPSILON, p.z), b),
+        boxSDF(vec3(p.x, p.y, p.z  + EPSILON), b) - boxSDF(vec3(p.x, p.y, p.z - EPSILON), b)));
+
+	vec3 K_a = (i.normal + vec3(1.0)) / 2.0;
+    vec3 K_d = K_a;
+    vec3 K_s = vec3(1.0, 1.0, 1.0);
+    float shininess = 10.0;
+    
+    i.color = (i.normal + 1.0) / 2.0;
+
+	return i;
 }
 
 float udRoundBox(vec3 p, vec3 b, float r) {
@@ -188,13 +237,27 @@ float toasterBodySDF(vec3 p) {
 	float toasterMinus = boxSDF(p + vec3(0.0, 1.2, 0.0), vec3(1.4, 0.125, 2.1));
 	toaster = differenceSDF(toaster, toasterMinus);
 
-
 	float wheelHole1 = wheelHoleSDF(p + vec3(-1.0, 0.9, 0.9));
 	float wheelHole2 = wheelHoleSDF(p + vec3(-1.0, 0.9, -0.9));
 	float wheelHole3 = wheelHoleSDF(p + vec3(1.0, 0.9, 0.9));
 	float wheelHole4 = wheelHoleSDF(p + vec3(1.0, 0.9, -0.9));
 	float wheelHoles = unionSDF(unionSDF(wheelHole1, wheelHole2), unionSDF(wheelHole3, wheelHole4));
 	toaster = differenceSDF(toaster, wheelHoles);
+
+	float PI = 3.14159;
+	float x = fract(u_Time) * (2.0 * PI);
+	float leverHeight = 0.5 * (0.5 -((2.0*floor(x/(2.0*PI)) - floor(2.0*(x/(2.0*PI))) + 1.0)*(sin(-(x-(PI/2.0)))+1.0) + 
+		2.0*fract(x/(PI / 2.0)) * (2.0*floor((x-PI)/(2.0*PI)) - floor(2.0*((x-PI)/(2.0*PI))) + 1.0) * 
+		(2.0*floor((x+(PI/2.0))/(PI)) - floor(2.0*((x+(PI/2.0))/(PI))) + 1.0))); 
+	float leverHandle = udRoundBox(p + vec3(0.0, leverHeight, -2.15), vec3(0.2, 0.06, 0.05), 0.1);
+	
+	toaster = unionSDF(toaster, leverHandle);
+
+	float dial = cylinderSDF(rotateZ(-0.61) * (p + vec3(-0.65, 0.6, -1.95)), 0.3, 0.2);
+	float dialHandle = boxSDF(rotateZ(-0.61) * (p + vec3(-0.65, 0.6, -2.05)), vec3(0.18, 0.02, 0.2));
+	dial = smoothUnionSDF(dial, dialHandle);
+
+	toaster = unionSDF(toaster, dial);
 
 	return toaster;
 }
@@ -216,15 +279,59 @@ float repeatWheelTreadSDF(vec3 p, vec3 c) {
     return wheelTreadSDF(rotateX(0.1) * q);
 }
 
-float sceneSDF(vec3 p) {
-	float leverHandle = udRoundBox(p + vec3(0.0, -0.6, -2.15), vec3(0.2, 0.06, 0.05), 0.1);
-	
-	float toaster = unionSDF(toasterBodySDF(p), leverHandle);
+float planeSDF(vec3 p, vec4 n){
+  return dot(p,n.xyz) + n.w;
+}
 
-	float dial = cylinderSDF(rotateZ(-0.61) * (p + vec3(-0.65, 0.6, -1.95)), 0.3, 0.2);
-	float dialHandle = boxSDF(rotateZ(-0.61) * (p + vec3(-0.65, 0.6, -2.05)), vec3(0.18, 0.02, 0.2));
-	dial = smoothUnionSDF(dial, dialHandle);
-	toaster = unionSDF(toaster, dial);
+float sinc( float x, float k ) {
+    float a = 3.14159 * (float(k)*x-1.0);
+    return sin(a)/a;
+}
+
+float outletSDF(vec3 p) {
+	float outletCover = udRoundBox(p + vec3(0.0, 0.0, 5.0), vec3(0.5, 0.9, 0.01), 0.05);
+
+	float outletSphereSubtract1 = sphereSDF(p + vec3(0.0, 0.4, 4.95), 0.3);
+	float outletBoxSubtract1 = boxSDF(p + vec3(0.0, 0.4, 4.95), vec3(0.5, 0.25, 0.1));
+	float outletThingSubtract1 = intersectSDF(outletSphereSubtract1, outletBoxSubtract1);
+	float outletSphereSubtract2 = sphereSDF(p + vec3(0.0, -0.4, 4.95), 0.3);
+	float outletBoxSubtract2 = boxSDF(p + vec3(0.0, -0.4, 4.95), vec3(0.5, 0.25, 0.1));
+	float outletThingSubtract2 = intersectSDF(outletSphereSubtract2, outletBoxSubtract2);
+	float outletThingSubtract = unionSDF(outletThingSubtract1, outletThingSubtract2);
+
+	float outlet = differenceSDF(outletCover, outletThingSubtract);
+
+	float outletSphereUnion1 = sphereSDF(p + vec3(0.0, 0.4, 4.95), 0.28);
+	float outletBoxUnion1 = boxSDF(p + vec3(0.0, 0.4, 4.95), vec3(0.5, 0.23, 0.05));
+	float outletThingUnion1  = intersectSDF(outletSphereUnion1, outletBoxUnion1);
+	float outletHole1_1 = boxSDF(p + vec3(0.1, 0.4, 4.9), vec3(0.03, 0.1, 0.05));
+	float outletHole1_2 = boxSDF(p + vec3(-0.1, 0.4, 4.9), vec3(0.03, 0.1, 0.05));
+	float outletHoles1 = unionSDF(outletHole1_1, outletHole1_2);
+	outletThingUnion1 = differenceSDF(outletThingUnion1, outletHoles1);
+
+	float outletSphereUnion2 = sphereSDF(p + vec3(0.0, -0.4, 4.95), 0.28);
+	float outletBoxUnion2 = boxSDF(p + vec3(0.0, -0.4, 4.95), vec3(0.5, 0.23, 0.05));
+	float outletThingUnion2  = intersectSDF(outletSphereUnion2, outletBoxUnion2);
+	float outletHole2_1 = boxSDF(p + vec3(0.1, -0.4, 4.9), vec3(0.03, 0.1, 0.05));
+	float outletHole2_2 = boxSDF(p + vec3(-0.1, -0.4, 4.9), vec3(0.03, 0.1, 0.05));
+	float outletHoles2 = unionSDF(outletHole2_1, outletHole2_2);
+	outletThingUnion2 = differenceSDF(outletThingUnion2, outletHoles2);
+	
+	float outletThingUnion = unionSDF(outletThingUnion1, outletThingUnion2);
+
+	outlet = unionSDF(outlet, outletThingUnion);
+
+	return outlet;
+}
+
+float repeatOutletSDF(vec3 p, vec3 c) {
+	vec3 q = mod3(p, c) - 0.5 * c;
+    return outletSDF(q);
+}
+
+float sceneSDF(vec3 p) {
+	float toasterBodyJitter = 0.03 * sin(u_Time * 125.0);
+	float toaster = toasterBodySDF(p + vec3(0.0, 0.0, toasterBodyJitter));
 
 	float wheelSpoke1 = cylinderSDF((rotateY(1.5708) * p) + vec3(0.9, 0.9, 0.0), 2.7, 0.1);
 	float wheelSpoke2 = cylinderSDF((rotateY(1.5708) * p) + vec3(-0.9, 0.9, 0.0), 2.7, 0.1);
@@ -241,9 +348,23 @@ float sceneSDF(vec3 p) {
 	float wheels = unionSDF(unionSDF(wheel1, wheel2), unionSDF(wheel3, wheel4));
 	toaster = unionSDF(toaster, wheels);
 
-	float toast1 = toastSDF(p + vec3(0.4, 0.0, 0.0));
-	float toast2 = toastSDF(p + vec3(-0.4, 0.0, 0.0));
-	return unionSDF(toaster, unionSDF(toast1, toast2));
+	float PI = 3.14159;
+	float x = fract(u_Time) * (2.0 * PI);
+	float toastHeight = 1.0 + -((2.0*floor(x/(2.0*PI)) - floor(2.0*(x/(2.0*PI))) + 1.0)*(sin(-(x-(PI/2.0)))+1.0) + 
+		2.0*fract(x/(PI / 2.0)) * (2.0*floor((x-PI)/(2.0*PI)) - floor(2.0*((x-PI)/(2.0*PI))) + 1.0) * 
+		(2.0*floor((x+(PI/2.0))/(PI)) - floor(2.0*((x+(PI/2.0))/(PI))) + 1.0));
+	float toast1 = toastSDF(p + vec3(0.4, toastHeight, 0.0));
+	float toast2 = toastSDF(p + vec3(-0.4, toastHeight, 0.0));
+	float toasterWithToast = unionSDF(toaster, unionSDF(toast1, toast2));
+
+	//float floor = planeSDF(p + vec3(0.0, 5.0, 0.0), normalize(vec4(0.0, 1.0, 0.0, 1.0)));
+	//float wall1 = planeSDF(p + vec3(15.0, 0.0, 0.0), normalize(vec4(1.0, 0.0, 0.0, 1.0)));
+	//float wall2 = planeSDF(p + vec3(0.0, 0.0, 9.0), normalize(vec4(0.0, 0.0, 1.0, 1.0)));
+	//return unionSDF(unionSDF(floor, unionSDF(wall1, wall2)), toasterWithToast);
+
+	//vec3 specialP = vec3(p.x + u_Time, p.x, p.z);
+	float outlets = repeatOutletSDF(p, vec3(2.0, 0.0, 0.0));
+	return unionSDF(toasterWithToast, outlets);
 
 }
 
@@ -392,20 +513,44 @@ mat4 viewMatrix(vec3 eye, vec3 center, vec3 up) {
     );
 }
 
+float rect(vec2 r, vec2 bottomLeft, vec2 topRight) {
+	float ret;
+	float d = 0.005;
+	ret = smoothstep(bottomLeft.x-d, bottomLeft.x+d, r.x);
+	ret *= smoothstep(bottomLeft.y-d, bottomLeft.y+d, r.y);
+	ret *= 1.0 - smoothstep(topRight.y-d, topRight.y+d, r.y);
+	ret *= 1.0 - smoothstep(topRight.x-d, topRight.x+d, r.x);
+	return ret;
+}
+
+
 void main() {
 	vec2 fragCoord = ((fs_Pos.xy + 1.0) / 2.0) * u_AspectRatio.xy;
 	
 	vec3 viewDir = rayDirection(45.0, u_AspectRatio.xy, fragCoord);
     
-	vec3 eye = vec3(15.0, 10.0, 7.0);
     mat4 viewToWorld = viewMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     
     float dist = shortestDistanceToSurface(eye, worldDir, MIN_DIST, MAX_DIST);
+	vec2 r =  2.0 * vec2(fragCoord.xy - 0.5 * u_AspectRatio.xy) / u_AspectRatio.y;
     
+	vec3 col1 = vec3(0.216, 0.471, 0.698); // blue
+	float xMax = u_AspectRatio.x / u_AspectRatio.y;
     if (dist > MAX_DIST - EPSILON) {
         // Didn't hit anything
-        out_Col = vec4(0.0, 0.0, 0.0, 1.0);
+		// background
+		vec3 ret = vec3(0.1);
+		for(float i = -1.0; i < 1.0; i+= 0.2) {
+			float x = (fract(2.0 * u_Time) * 2.0) - 1.0;
+			// y coordinate is the loop value
+			float y = i;
+			vec2 s = r - vec2(x, y);
+
+			ret = mix(ret, col1, rect(s, vec2(-0.5, -0.06), vec2(0.5, 0.06)));
+		}
+		out_Col = vec4(ret, 1.0);
+        //out_Col = vec4(0.0, 0.0, 0.0, 1.0);
 		return;
     }
     

@@ -72,7 +72,7 @@ function main() {
     raymarchShader.setAspectRatio(vec2.fromValues(window.innerWidth, window.innerHeight));
 
     raymarchShader.setTime(time);
-    time++;
+    time += 0.01;
     
     // March!
     raymarchShader.draw(screenQuad);
