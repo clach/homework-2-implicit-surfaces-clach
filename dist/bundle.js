@@ -145,69 +145,6 @@ function equals(a, b) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gl_matrix_common__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gl_matrix_mat2__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gl_matrix_mat2d__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gl_matrix_mat3__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__gl_matrix_quat__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__gl_matrix_vec2__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__gl_matrix_vec3__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec4__ = __webpack_require__(7);
-/* unused harmony reexport glMatrix */
-/* unused harmony reexport mat2 */
-/* unused harmony reexport mat2d */
-/* unused harmony reexport mat3 */
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4__; });
-/* unused harmony reexport quat */
-/* unused harmony reexport vec2 */
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_7__gl_matrix_vec3__; });
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec4__; });
-/**
- * @fileoverview gl-matrix - High performance matrix and vector operations
- * @author Brandon Jones
- * @author Colin MacKenzie IV
- * @version 2.4.0
- */
-
-/* Copyright (c) 2015, Brandon Jones, Colin MacKenzie IV.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE. */
-// END HEADER
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return gl; });
 /* harmony export (immutable) */ __webpack_exports__["b"] = setGL;
 var gl;
@@ -217,7 +154,7 @@ function setGL(_gl) {
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 module.exports = invert;
@@ -275,6 +212,69 @@ function invert(out, a) {
 
     return out;
 };
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gl_matrix_common__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gl_matrix_mat2__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gl_matrix_mat2d__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gl_matrix_mat3__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__gl_matrix_quat__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__gl_matrix_vec2__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__gl_matrix_vec3__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec4__ = __webpack_require__(7);
+/* unused harmony reexport glMatrix */
+/* unused harmony reexport mat2 */
+/* unused harmony reexport mat2d */
+/* unused harmony reexport mat3 */
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4__; });
+/* unused harmony reexport quat */
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_6__gl_matrix_vec2__; });
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_7__gl_matrix_vec3__; });
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec4__; });
+/**
+ * @fileoverview gl-matrix - High performance matrix and vector operations
+ * @author Brandon Jones
+ * @author Colin MacKenzie IV
+ * @version 2.4.0
+ */
+
+/* Copyright (c) 2015, Brandon Jones, Colin MacKenzie IV.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE. */
+// END HEADER
+
+
+
+
+
+
+
+
+
+
+
+
 
 /***/ }),
 /* 4 */
@@ -2622,7 +2622,7 @@ const forEach = (function() {
 
 module.exports = createFilteredVector
 
-var cubicHermite = __webpack_require__(37)
+var cubicHermite = __webpack_require__(36)
 var bsearch = __webpack_require__(9)
 
 function clamp(lo, hi, x) {
@@ -3298,17 +3298,15 @@ function determinant(a) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stats_js__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stats_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_stats_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dat_gui__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dat_gui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_dat_gui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__geometry_Icosphere__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__rendering_gl_OpenGLRenderer__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Camera__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__globals__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__ = __webpack_require__(64);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__geometry_Square__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Camera__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__globals__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__rendering_gl_ShaderProgram__ = __webpack_require__(65);
 
 
 
@@ -3317,15 +3315,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 // Define an object with application parameters and button callbacks
-const controls = {
-    tesselations: 5,
-    'Load Scene': loadScene,
-};
-let icosphere;
-function loadScene() {
-    icosphere = new __WEBPACK_IMPORTED_MODULE_3__geometry_Icosphere__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0), 1, controls.tesselations);
-    icosphere.create();
-}
+// This will be referred to by dat.GUI's functions that add GUI elements.
+const controls = {};
+let screenQuad;
 function main() {
     // Initial display for framerate
     const stats = __WEBPACK_IMPORTED_MODULE_1_stats_js__();
@@ -3334,48 +3326,56 @@ function main() {
     stats.domElement.style.left = '0px';
     stats.domElement.style.top = '0px';
     document.body.appendChild(stats.domElement);
-    // Add controls to the gui
+    // TODO: add any controls you need to the gui
     const gui = new __WEBPACK_IMPORTED_MODULE_2_dat_gui__["GUI"]();
-    gui.add(controls, 'tesselations', 0, 8).step(1);
-    gui.add(controls, 'Load Scene');
+    // E.G. gui.add(controls, 'tesselations', 0, 8).step(1);
     // get canvas and webgl context
     const canvas = document.getElementById('canvas');
+    function setSize(width, height) {
+        canvas.width = width;
+        canvas.height = height;
+    }
     const gl = canvas.getContext('webgl2');
     if (!gl) {
         alert('WebGL 2 not supported!');
     }
     // `setGL` is a function imported above which sets the value of `gl` in the `globals.ts` module.
     // Later, we can import `gl` from `globals.ts` to access it
-    Object(__WEBPACK_IMPORTED_MODULE_6__globals__["b" /* setGL */])(gl);
-    // Initial call to load scene
-    loadScene();
-    const camera = new __WEBPACK_IMPORTED_MODULE_5__Camera__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 5), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec3 */].fromValues(0, 0, 0));
-    const renderer = new __WEBPACK_IMPORTED_MODULE_4__rendering_gl_OpenGLRenderer__["a" /* default */](canvas);
-    renderer.setClearColor(0.2, 0.2, 0.2, 1);
-    gl.enable(gl.DEPTH_TEST);
-    const lambert = new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["b" /* default */]([
-        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(65)),
-        new __WEBPACK_IMPORTED_MODULE_7__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(66)),
+    Object(__WEBPACK_IMPORTED_MODULE_5__globals__["b" /* setGL */])(gl);
+    screenQuad = new __WEBPACK_IMPORTED_MODULE_3__geometry_Square__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0, 0, 0));
+    screenQuad.create();
+    const camera = new __WEBPACK_IMPORTED_MODULE_4__Camera__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0, 0, 5), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0, 0, 0));
+    gl.clearColor(0.0, 0.0, 0.0, 1);
+    gl.disable(gl.DEPTH_TEST);
+    const raymarchShader = new __WEBPACK_IMPORTED_MODULE_6__rendering_gl_ShaderProgram__["b" /* default */]([
+        new __WEBPACK_IMPORTED_MODULE_6__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(66)),
+        new __WEBPACK_IMPORTED_MODULE_6__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(67)),
     ]);
+    let time = 0;
     // This function will be called every frame
     function tick() {
         camera.update();
         stats.begin();
         gl.viewport(0, 0, window.innerWidth, window.innerHeight);
-        renderer.clear();
-        renderer.render(camera, lambert, [
-            icosphere,
-        ]);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        // TODO: get / calculate relevant uniforms to send to shader here
+        // TODO: send uniforms to shader
+        raymarchShader.setAspectRatio(__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* vec2 */].fromValues(window.innerWidth, window.innerHeight));
+        raymarchShader.setTime(time);
+        time += 0.01;
+        // March!
+        raymarchShader.draw(screenQuad);
+        // TODO: more shaders to layer / process the first one? (either via framebuffers or blending)
         stats.end();
         // Tell the browser to call `tick` again whenever it renders a new frame
         requestAnimationFrame(tick);
     }
     window.addEventListener('resize', function () {
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        setSize(window.innerWidth, window.innerHeight);
         camera.setAspectRatio(window.innerWidth / window.innerHeight);
         camera.updateProjectionMatrix();
     }, false);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    setSize(window.innerWidth, window.innerHeight);
     camera.setAspectRatio(window.innerWidth / window.innerHeight);
     camera.updateProjectionMatrix();
     // Start the render loop
@@ -6787,40 +6787,41 @@ const setAxes = (function() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export create */
-/* unused harmony export clone */
-/* unused harmony export fromValues */
-/* unused harmony export copy */
-/* unused harmony export set */
-/* unused harmony export add */
-/* unused harmony export subtract */
-/* unused harmony export multiply */
-/* unused harmony export divide */
-/* unused harmony export ceil */
-/* unused harmony export floor */
-/* unused harmony export min */
-/* unused harmony export max */
-/* unused harmony export round */
-/* unused harmony export scale */
-/* unused harmony export scaleAndAdd */
-/* unused harmony export distance */
-/* unused harmony export squaredDistance */
-/* unused harmony export length */
-/* unused harmony export squaredLength */
-/* unused harmony export negate */
-/* unused harmony export inverse */
-/* unused harmony export normalize */
-/* unused harmony export dot */
-/* unused harmony export cross */
-/* unused harmony export lerp */
-/* unused harmony export random */
-/* unused harmony export transformMat2 */
-/* unused harmony export transformMat2d */
-/* unused harmony export transformMat3 */
-/* unused harmony export transformMat4 */
-/* unused harmony export str */
-/* unused harmony export exactEquals */
-/* unused harmony export equals */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["create"] = create;
+/* harmony export (immutable) */ __webpack_exports__["clone"] = clone;
+/* harmony export (immutable) */ __webpack_exports__["fromValues"] = fromValues;
+/* harmony export (immutable) */ __webpack_exports__["copy"] = copy;
+/* harmony export (immutable) */ __webpack_exports__["set"] = set;
+/* harmony export (immutable) */ __webpack_exports__["add"] = add;
+/* harmony export (immutable) */ __webpack_exports__["subtract"] = subtract;
+/* harmony export (immutable) */ __webpack_exports__["multiply"] = multiply;
+/* harmony export (immutable) */ __webpack_exports__["divide"] = divide;
+/* harmony export (immutable) */ __webpack_exports__["ceil"] = ceil;
+/* harmony export (immutable) */ __webpack_exports__["floor"] = floor;
+/* harmony export (immutable) */ __webpack_exports__["min"] = min;
+/* harmony export (immutable) */ __webpack_exports__["max"] = max;
+/* harmony export (immutable) */ __webpack_exports__["round"] = round;
+/* harmony export (immutable) */ __webpack_exports__["scale"] = scale;
+/* harmony export (immutable) */ __webpack_exports__["scaleAndAdd"] = scaleAndAdd;
+/* harmony export (immutable) */ __webpack_exports__["distance"] = distance;
+/* harmony export (immutable) */ __webpack_exports__["squaredDistance"] = squaredDistance;
+/* harmony export (immutable) */ __webpack_exports__["length"] = length;
+/* harmony export (immutable) */ __webpack_exports__["squaredLength"] = squaredLength;
+/* harmony export (immutable) */ __webpack_exports__["negate"] = negate;
+/* harmony export (immutable) */ __webpack_exports__["inverse"] = inverse;
+/* harmony export (immutable) */ __webpack_exports__["normalize"] = normalize;
+/* harmony export (immutable) */ __webpack_exports__["dot"] = dot;
+/* harmony export (immutable) */ __webpack_exports__["cross"] = cross;
+/* harmony export (immutable) */ __webpack_exports__["lerp"] = lerp;
+/* harmony export (immutable) */ __webpack_exports__["random"] = random;
+/* harmony export (immutable) */ __webpack_exports__["transformMat2"] = transformMat2;
+/* harmony export (immutable) */ __webpack_exports__["transformMat2d"] = transformMat2d;
+/* harmony export (immutable) */ __webpack_exports__["transformMat3"] = transformMat3;
+/* harmony export (immutable) */ __webpack_exports__["transformMat4"] = transformMat4;
+/* harmony export (immutable) */ __webpack_exports__["str"] = str;
+/* harmony export (immutable) */ __webpack_exports__["exactEquals"] = exactEquals;
+/* harmony export (immutable) */ __webpack_exports__["equals"] = equals;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common__ = __webpack_require__(0);
 /* Copyright (c) 2015, Brandon Jones, Colin MacKenzie IV.
 
@@ -7329,7 +7330,7 @@ function equals(a, b) {
  * @function
  */
 const len = length;
-/* unused harmony export len */
+/* harmony export (immutable) */ __webpack_exports__["len"] = len;
 
 
 /**
@@ -7337,7 +7338,7 @@ const len = length;
  * @function
  */
 const sub = subtract;
-/* unused harmony export sub */
+/* harmony export (immutable) */ __webpack_exports__["sub"] = sub;
 
 
 /**
@@ -7345,7 +7346,7 @@ const sub = subtract;
  * @function
  */
 const mul = multiply;
-/* unused harmony export mul */
+/* harmony export (immutable) */ __webpack_exports__["mul"] = mul;
 
 
 /**
@@ -7353,7 +7354,7 @@ const mul = multiply;
  * @function
  */
 const div = divide;
-/* unused harmony export div */
+/* harmony export (immutable) */ __webpack_exports__["div"] = div;
 
 
 /**
@@ -7361,7 +7362,7 @@ const div = divide;
  * @function
  */
 const dist = distance;
-/* unused harmony export dist */
+/* harmony export (immutable) */ __webpack_exports__["dist"] = dist;
 
 
 /**
@@ -7369,7 +7370,7 @@ const dist = distance;
  * @function
  */
 const sqrDist = squaredDistance;
-/* unused harmony export sqrDist */
+/* harmony export (immutable) */ __webpack_exports__["sqrDist"] = sqrDist;
 
 
 /**
@@ -7377,7 +7378,7 @@ const sqrDist = squaredDistance;
  * @function
  */
 const sqrLen = squaredLength;
-/* unused harmony export sqrLen */
+/* harmony export (immutable) */ __webpack_exports__["sqrLen"] = sqrLen;
 
 
 /**
@@ -7420,7 +7421,7 @@ const forEach = (function() {
     return a;
   };
 })();
-/* unused harmony export forEach */
+/* harmony export (immutable) */ __webpack_exports__["forEach"] = forEach;
 
 
 
@@ -11873,142 +11874,28 @@ dat.utils.common);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__(1);
 
 
 
-class Icosphere extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a" /* default */] {
-    constructor(center, radius, subdivisions) {
+class Square extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a" /* default */] {
+    constructor(center) {
         super(); // Call the constructor of the super class. This is required.
-        this.radius = radius;
-        this.subdivisions = subdivisions;
-        this.center = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(center[0], center[1], center[2], 1);
+        this.center = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues(center[0], center[1], center[2], 1);
     }
     create() {
-        const X = 0.525731112119133606;
-        const Z = 0.850650808352039932;
-        const N = 0;
-        let maxIndexCount = 20 * Math.pow(4, this.subdivisions);
-        let maxVertexCount = 10 * Math.pow(4, this.subdivisions) + 2;
-        // Create buffers to back geometry data
-        // Index data will ping pong back and forth between buffer0 and buffer1 during creation
-        // All data will be in buffer0 at the end
-        const buffer0 = new ArrayBuffer(maxIndexCount * 3 * Uint32Array.BYTES_PER_ELEMENT +
-            maxVertexCount * 4 * Float32Array.BYTES_PER_ELEMENT +
-            maxVertexCount * 4 * Float32Array.BYTES_PER_ELEMENT);
-        const buffer1 = new ArrayBuffer(maxIndexCount * 3 * Uint32Array.BYTES_PER_ELEMENT);
-        const buffers = [buffer0, buffer1];
-        let b = 0;
-        const indexByteOffset = 0;
-        const vertexByteOffset = maxIndexCount * 3 * Uint32Array.BYTES_PER_ELEMENT;
-        const normalByteOffset = vertexByteOffset;
-        const positionByteOffset = vertexByteOffset + maxVertexCount * 4 * Float32Array.BYTES_PER_ELEMENT;
-        // Create 3-uint buffer views into the backing buffer to represent triangles
-        // The C++ analogy to this would be something like:
-        // triangles[i] = reinterpret_cast<std::array<unsigned int, 3>*>(&buffer[offset]);
-        let triangles = new Array(20);
-        let nextTriangles = new Array();
-        for (let i = 0; i < 20; ++i) {
-            triangles[i] = new Uint32Array(buffers[b], indexByteOffset + i * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-        }
-        // Create 3-float buffer views into the backing buffer to represent positions
-        let vertices = new Array(12);
-        for (let i = 0; i < 12; ++i) {
-            vertices[i] = new Float32Array(buffer0, vertexByteOffset + i * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
-        }
-        // Initialize normals for a 20-sided icosahedron
-        vertices[0].set([-X, N, Z, 0]);
-        vertices[1].set([X, N, Z, 0]);
-        vertices[2].set([-X, N, -Z, 0]);
-        vertices[3].set([X, N, -Z, 0]);
-        vertices[4].set([N, Z, X, 0]);
-        vertices[5].set([N, Z, -X, 0]);
-        vertices[6].set([N, -Z, X, 0]);
-        vertices[7].set([N, -Z, -X, 0]);
-        vertices[8].set([Z, X, N, 0]);
-        vertices[9].set([-Z, X, N, 0]);
-        vertices[10].set([Z, -X, N, 0]);
-        vertices[11].set([-Z, -X, N, 0]);
-        // Initialize indices for a 20-sided icosahedron
-        triangles[0].set([0, 4, 1]);
-        triangles[1].set([0, 9, 4]);
-        triangles[2].set([9, 5, 4]);
-        triangles[3].set([4, 5, 8]);
-        triangles[4].set([4, 8, 1]);
-        triangles[5].set([8, 10, 1]);
-        triangles[6].set([8, 3, 10]);
-        triangles[7].set([5, 3, 8]);
-        triangles[8].set([5, 2, 3]);
-        triangles[9].set([2, 7, 3]);
-        triangles[10].set([7, 10, 3]);
-        triangles[11].set([7, 6, 10]);
-        triangles[12].set([7, 11, 6]);
-        triangles[13].set([11, 0, 6]);
-        triangles[14].set([0, 1, 6]);
-        triangles[15].set([6, 1, 10]);
-        triangles[16].set([9, 0, 11]);
-        triangles[17].set([9, 11, 2]);
-        triangles[18].set([9, 2, 5]);
-        triangles[19].set([7, 2, 11]);
-        // This loop subdivides the icosahedron
-        for (let s = 0; s < this.subdivisions; ++s) {
-            b = 1 - b;
-            nextTriangles.length = triangles.length * 4;
-            let triangleIdx = 0;
-            // edgeMap maps a pair of vertex indices to a vertex index at their midpoint
-            // The function `mid` will get that midpoint vertex if it has already been created
-            // or it will create the vertex and add it to the map
-            let edgeMap = new Map();
-            function mid(v0, v1) {
-                let key = [v0, v1].sort().join('_');
-                if (!edgeMap.has(key)) {
-                    let midpoint = new Float32Array(buffer0, vertexByteOffset + vertices.length * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].add(midpoint, vertices[v0], vertices[v1]);
-                    __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].normalize(midpoint, midpoint);
-                    edgeMap.set(key, vertices.length);
-                    vertices.push(midpoint);
-                }
-                return edgeMap.get(key);
-            }
-            for (let t = 0; t < triangles.length; ++t) {
-                let v0 = triangles[t][0];
-                let v1 = triangles[t][1];
-                let v2 = triangles[t][2];
-                let v3 = mid(v0, v1); // Get or create a vertex between these two vertices
-                let v4 = mid(v1, v2);
-                let v5 = mid(v2, v0);
-                let t0 = nextTriangles[triangleIdx] = new Uint32Array(buffers[b], indexByteOffset + (triangleIdx++) * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-                let t1 = nextTriangles[triangleIdx] = new Uint32Array(buffers[b], indexByteOffset + (triangleIdx++) * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-                let t2 = nextTriangles[triangleIdx] = new Uint32Array(buffers[b], indexByteOffset + (triangleIdx++) * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-                let t3 = nextTriangles[triangleIdx] = new Uint32Array(buffers[b], indexByteOffset + (triangleIdx++) * 3 * Uint32Array.BYTES_PER_ELEMENT, 3);
-                let triangleOffset = nextTriangles.length;
-                t0.set([v0, v3, v5]);
-                t1.set([v3, v4, v5]);
-                t2.set([v3, v1, v4]);
-                t3.set([v5, v4, v2]);
-            }
-            // swap buffers
-            let temp = triangles;
-            triangles = nextTriangles;
-            nextTriangles = temp;
-        }
-        if (b === 1) {
-            // if indices did not end up in buffer0, copy them there now
-            let temp0 = new Uint32Array(buffer0, 0, 3 * triangles.length);
-            let temp1 = new Uint32Array(buffer1, 0, 3 * triangles.length);
-            temp0.set(temp1);
-        }
-        // Populate one position for each normal
-        for (let i = 0; i < vertices.length; ++i) {
-            let pos = new Float32Array(buffer0, positionByteOffset + i * 4 * Float32Array.BYTES_PER_ELEMENT, 4);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].scaleAndAdd(pos, this.center, vertices[i], this.radius);
-        }
-        this.buffer = buffer0;
-        this.indices = new Uint32Array(this.buffer, indexByteOffset, triangles.length * 3);
-        this.normals = new Float32Array(this.buffer, normalByteOffset, vertices.length * 4);
-        this.positions = new Float32Array(this.buffer, positionByteOffset, vertices.length * 4);
+        this.indices = new Uint32Array([0, 1, 2,
+            0, 2, 3]);
+        this.normals = new Float32Array([0, 0, 1, 0,
+            0, 0, 1, 0,
+            0, 0, 1, 0,
+            0, 0, 1, 0]);
+        this.positions = new Float32Array([-1, -1, 0, 1,
+            1, -1, 0, 1,
+            1, 1, 0, 1,
+            -1, 1, 0, 1]);
         this.generateIdx();
         this.generatePos();
         this.generateNor();
@@ -12019,11 +11906,11 @@ class Icosphere extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a"
         __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.normals, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
         __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
         __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.positions, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
-        console.log(`Created icosphere with ${vertices.length} vertices`);
+        console.log(`Created square`);
     }
 }
 ;
-/* harmony default export */ __webpack_exports__["a"] = (Icosphere);
+/* harmony default export */ __webpack_exports__["a"] = (Square);
 
 
 /***/ }),
@@ -12031,7 +11918,7 @@ class Icosphere extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a"
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__globals__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__globals__ = __webpack_require__(1);
 
 class Drawable {
     constructor() {
@@ -12040,7 +11927,7 @@ class Drawable {
         this.posBound = false;
         this.norBound = false;
     }
-    destory() {
+    destroy() {
         __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufIdx);
         __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufPos);
         __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufNor);
@@ -12091,51 +11978,9 @@ class Drawable {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(2);
-
-
-// In this file, `gl` is accessible because it is imported above
-class OpenGLRenderer {
-    constructor(canvas) {
-        this.canvas = canvas;
-    }
-    setClearColor(r, g, b, a) {
-        __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].clearColor(r, g, b, a);
-    }
-    setSize(width, height) {
-        this.canvas.width = width;
-        this.canvas.height = height;
-    }
-    clear() {
-        __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].clear(__WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].COLOR_BUFFER_BIT | __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].DEPTH_BUFFER_BIT);
-    }
-    render(camera, prog, drawables) {
-        let model = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-        let viewProj = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-        let color = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec4 */].fromValues(1, 0, 0, 1);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].identity(model);
-        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].multiply(viewProj, camera.projectionMatrix, camera.viewMatrix);
-        prog.setModelMatrix(model);
-        prog.setViewProjMatrix(viewProj);
-        prog.setGeometryColor(color);
-        for (let drawable of drawables) {
-            prog.draw(drawable);
-        }
-    }
-}
-;
-/* harmony default export */ __webpack_exports__["a"] = (OpenGLRenderer);
-
-
-/***/ }),
-/* 31 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_3d_view_controls__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_3d_view_controls__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_3d_view_controls___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_3d_view_controls__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_gl_matrix__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_gl_matrix__ = __webpack_require__(3);
 
 
 class Camera {
@@ -12146,15 +11991,15 @@ class Camera {
         this.aspectRatio = 1;
         this.near = 0.1;
         this.far = 1000;
-        this.position = __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["b" /* vec3 */].create();
-        this.direction = __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["b" /* vec3 */].create();
-        this.target = __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["b" /* vec3 */].create();
-        this.up = __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["b" /* vec3 */].create();
+        this.position = __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["c" /* vec3 */].create();
+        this.direction = __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["c" /* vec3 */].create();
+        this.target = __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["c" /* vec3 */].create();
+        this.up = __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["c" /* vec3 */].create();
         this.controls = __WEBPACK_IMPORTED_MODULE_0_3d_view_controls__(document.getElementById('canvas'), {
             eye: position,
             center: target,
         });
-        __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["b" /* vec3 */].add(this.target, this.position, this.direction);
+        __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["c" /* vec3 */].add(this.target, this.position, this.direction);
         __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["a" /* mat4 */].lookAt(this.viewMatrix, this.controls.eye, this.controls.center, this.controls.up);
     }
     setAspectRatio(aspectRatio) {
@@ -12165,7 +12010,7 @@ class Camera {
     }
     update() {
         this.controls.tick();
-        __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["b" /* vec3 */].add(this.target, this.position, this.direction);
+        __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["c" /* vec3 */].add(this.target, this.position, this.direction);
         __WEBPACK_IMPORTED_MODULE_1_gl_matrix__["a" /* mat4 */].lookAt(this.viewMatrix, this.controls.eye, this.controls.center, this.controls.up);
     }
 }
@@ -12174,7 +12019,7 @@ class Camera {
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12182,11 +12027,12 @@ class Camera {
 
 module.exports = createCamera
 
-var now         = __webpack_require__(33)
-var createView  = __webpack_require__(35)
-var mouseChange = __webpack_require__(58)
-var mouseWheel  = __webpack_require__(60)
-var mouseOffset = __webpack_require__(63)
+var now         = __webpack_require__(32)
+var createView  = __webpack_require__(34)
+var mouseChange = __webpack_require__(57)
+var mouseWheel  = __webpack_require__(59)
+var mouseOffset = __webpack_require__(62)
+var hasPassive  = __webpack_require__(63)
 
 function createCamera(element, options) {
   element = element || document.body
@@ -12351,15 +12197,23 @@ function createCamera(element, options) {
     var xy = mouseOffset(ev.changedTouches[0], element)
     handleInteraction(0, xy[0], xy[1], lastMods)
     handleInteraction(1, xy[0], xy[1], lastMods)
-  })
+
+    ev.preventDefault()
+  }, hasPassive ? {passive: false} : false)
+
   element.addEventListener('touchmove', function (ev) {
     var xy = mouseOffset(ev.changedTouches[0], element)
     handleInteraction(1, xy[0], xy[1], lastMods)
-  })
+
+    ev.preventDefault()
+  }, hasPassive ? {passive: false} : false)
+
   element.addEventListener('touchend', function (ev) {
     var xy = mouseOffset(ev.changedTouches[0], element)
     handleInteraction(0, lastX, lastY, lastMods)
-  })
+
+    ev.preventDefault()
+  }, hasPassive ? {passive: false} : false)
 
   function handleInteraction (buttons, x, y, mods) {
     var scale = 1.0 / element.clientHeight
@@ -12408,7 +12262,7 @@ function createCamera(element, options) {
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {module.exports =
@@ -12419,10 +12273,10 @@ function createCamera(element, options) {
     return +new Date
   }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports) {
 
 var g;
@@ -12449,7 +12303,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12457,9 +12311,9 @@ module.exports = g;
 
 module.exports = createViewController
 
-var createTurntable = __webpack_require__(36)
-var createOrbit     = __webpack_require__(39)
-var createMatrix    = __webpack_require__(42)
+var createTurntable = __webpack_require__(35)
+var createOrbit     = __webpack_require__(38)
+var createMatrix    = __webpack_require__(41)
 
 function ViewController(controllers, mode) {
   this._controllerNames = Object.keys(controllers)
@@ -12577,7 +12431,7 @@ function createViewController(options) {
 }
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12586,8 +12440,8 @@ function createViewController(options) {
 module.exports = createTurntableController
 
 var filterVector = __webpack_require__(8)
-var invert44     = __webpack_require__(3)
-var rotateM      = __webpack_require__(38)
+var invert44     = __webpack_require__(2)
+var rotateM      = __webpack_require__(37)
 var cross        = __webpack_require__(10)
 var normalize3   = __webpack_require__(4)
 var dot3         = __webpack_require__(11)
@@ -13155,7 +13009,7 @@ function createTurntableController(options) {
 }
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13200,7 +13054,7 @@ module.exports = cubicHermite
 module.exports.derivative = dcubicHermite
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports) {
 
 module.exports = rotate;
@@ -13269,7 +13123,7 @@ function rotate(out, a, rad, axis) {
 };
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13279,9 +13133,9 @@ module.exports = createOrbitController
 
 var filterVector  = __webpack_require__(8)
 var lookAt        = __webpack_require__(12)
-var mat4FromQuat  = __webpack_require__(40)
-var invert44      = __webpack_require__(3)
-var quatFromFrame = __webpack_require__(41)
+var mat4FromQuat  = __webpack_require__(39)
+var invert44      = __webpack_require__(2)
+var quatFromFrame = __webpack_require__(40)
 
 function len3(x,y,z) {
   return Math.sqrt(Math.pow(x,2) + Math.pow(y,2) + Math.pow(z,2))
@@ -13668,7 +13522,7 @@ function createOrbitController(options) {
 }
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports) {
 
 module.exports = fromQuat;
@@ -13720,7 +13574,7 @@ function fromQuat(out, q) {
 };
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13767,18 +13621,18 @@ function quatFromFrame(
 }
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var bsearch   = __webpack_require__(9)
-var m4interp  = __webpack_require__(43)
-var invert44  = __webpack_require__(3)
-var rotateX   = __webpack_require__(55)
-var rotateY   = __webpack_require__(56)
-var rotateZ   = __webpack_require__(57)
+var m4interp  = __webpack_require__(42)
+var invert44  = __webpack_require__(2)
+var rotateX   = __webpack_require__(54)
+var rotateY   = __webpack_require__(55)
+var rotateZ   = __webpack_require__(56)
 var lookAt    = __webpack_require__(12)
 var translate = __webpack_require__(14)
 var scale     = __webpack_require__(16)
@@ -13972,15 +13826,15 @@ function createMatrixCameraController(options) {
 
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var lerp = __webpack_require__(44)
+var lerp = __webpack_require__(43)
 
-var recompose = __webpack_require__(45)
-var decompose = __webpack_require__(48)
+var recompose = __webpack_require__(44)
+var decompose = __webpack_require__(47)
 var determinant = __webpack_require__(17)
-var slerp = __webpack_require__(53)
+var slerp = __webpack_require__(52)
 
 var state0 = state()
 var state1 = state()
@@ -14029,7 +13883,7 @@ function vec4() {
 }
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = lerp;
@@ -14054,7 +13908,7 @@ function lerp(out, a, b, t) {
 }
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -14071,10 +13925,10 @@ From: http://www.w3.org/TR/css3-transforms/#recomposing-to-a-3d-matrix
 var mat4 = {
     identity: __webpack_require__(13),
     translate: __webpack_require__(14),
-    multiply: __webpack_require__(46),
+    multiply: __webpack_require__(45),
     create: __webpack_require__(15),
     scale: __webpack_require__(16),
-    fromRotationTranslation: __webpack_require__(47)
+    fromRotationTranslation: __webpack_require__(46)
 }
 
 var rotationMatrix = mat4.create()
@@ -14119,7 +13973,7 @@ module.exports = function recomposeMat4(matrix, translation, scale, skew, perspe
 }
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports) {
 
 module.exports = multiply;
@@ -14166,7 +14020,7 @@ function multiply(out, a, b) {
 };
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = fromRotationTranslation;
@@ -14224,7 +14078,7 @@ function fromRotationTranslation(out, q, v) {
 };
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*jshint unused:true*/
@@ -14244,15 +14098,15 @@ https://github.com/ChromiumWebApps/chromium/blob/master/ui/gfx/transform_util.cc
 http://www.w3.org/TR/css3-transforms/#decomposing-a-3d-matrix
 */
 
-var normalize = __webpack_require__(49)
+var normalize = __webpack_require__(48)
 
 var create = __webpack_require__(15)
-var clone = __webpack_require__(50)
+var clone = __webpack_require__(49)
 var determinant = __webpack_require__(17)
-var invert = __webpack_require__(3)
-var transpose = __webpack_require__(51)
+var invert = __webpack_require__(2)
+var transpose = __webpack_require__(50)
 var vec3 = {
-    length: __webpack_require__(52),
+    length: __webpack_require__(51),
     normalize: __webpack_require__(4),
     dot: __webpack_require__(11),
     cross: __webpack_require__(10)
@@ -14408,7 +14262,7 @@ function combine(out, a, b, scale1, scale2) {
 }
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports) {
 
 module.exports = function normalize(out, mat) {
@@ -14423,7 +14277,7 @@ module.exports = function normalize(out, mat) {
 }
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = clone;
@@ -14456,7 +14310,7 @@ function clone(a) {
 };
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = transpose;
@@ -14510,7 +14364,7 @@ function transpose(out, a) {
 };
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports = length;
@@ -14529,13 +14383,13 @@ function length(a) {
 }
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(54)
+module.exports = __webpack_require__(53)
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = slerp
@@ -14592,7 +14446,7 @@ function slerp (out, a, b, t) {
 
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports) {
 
 module.exports = rotateX;
@@ -14641,7 +14495,7 @@ function rotateX(out, a, rad) {
 };
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, exports) {
 
 module.exports = rotateY;
@@ -14690,7 +14544,7 @@ function rotateY(out, a, rad) {
 };
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, exports) {
 
 module.exports = rotateZ;
@@ -14739,7 +14593,7 @@ function rotateZ(out, a, rad) {
 };
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14747,7 +14601,7 @@ function rotateZ(out, a, rad) {
 
 module.exports = mouseListen
 
-var mouse = __webpack_require__(59)
+var mouse = __webpack_require__(58)
 
 function mouseListen (element, callback) {
   if (!callback) {
@@ -14951,7 +14805,7 @@ function mouseListen (element, callback) {
 
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15018,13 +14872,13 @@ exports.y = mouseRelativeY
 
 
 /***/ }),
-/* 60 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var toPX = __webpack_require__(61)
+var toPX = __webpack_require__(60)
 
 module.exports = mouseWheelListen
 
@@ -15065,13 +14919,13 @@ function mouseWheelListen(element, callback, noScroll) {
 
 
 /***/ }),
-/* 61 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var parseUnit = __webpack_require__(62)
+var parseUnit = __webpack_require__(61)
 
 module.exports = toPX
 
@@ -15131,7 +14985,7 @@ function toPX(str, element) {
 }
 
 /***/ }),
-/* 62 */
+/* 61 */
 /***/ (function(module, exports) {
 
 module.exports = function parseUnit(str, out) {
@@ -15146,7 +15000,7 @@ module.exports = function parseUnit(str, out) {
 }
 
 /***/ }),
-/* 63 */
+/* 62 */
 /***/ (function(module, exports) {
 
 var rootPosition = { left: 0, top: 0 }
@@ -15177,22 +15031,57 @@ function getBoundingClientOffset (element) {
 
 
 /***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isBrowser = __webpack_require__(64)
+
+function detect() {
+	var supported = false
+
+	try {
+		var opts = Object.defineProperty({}, 'passive', {
+			get: function() {
+				supported = true
+			}
+		})
+
+		window.addEventListener('test', null, opts)
+		window.removeEventListener('test', null, opts)
+	} catch(e) {
+		supported = false
+	}
+
+	return supported
+}
+
+module.exports = isBrowser && detect()
+
+
+/***/ }),
 /* 64 */
+/***/ (function(module, exports) {
+
+module.exports = true;
+
+/***/ }),
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(2);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__globals__ = __webpack_require__(1);
 
 var activeProgram = null;
 class Shader {
     constructor(type, source) {
-        this.shader = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].createShader(type);
-        __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].shaderSource(this.shader, source);
-        __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].compileShader(this.shader);
-        if (!__WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getShaderParameter(this.shader, __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].COMPILE_STATUS)) {
-            throw __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getShaderInfoLog(this.shader);
+        this.shader = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createShader(type);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].shaderSource(this.shader, source);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].compileShader(this.shader);
+        if (!__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].getShaderParameter(this.shader, __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].COMPILE_STATUS)) {
+            throw __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].getShaderInfoLog(this.shader);
         }
     }
 }
@@ -15201,68 +15090,50 @@ class Shader {
 ;
 class ShaderProgram {
     constructor(shaders) {
-        this.prog = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].createProgram();
+        this.prog = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createProgram();
         for (let shader of shaders) {
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].attachShader(this.prog, shader.shader);
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].attachShader(this.prog, shader.shader);
         }
-        __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].linkProgram(this.prog);
-        if (!__WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getProgramParameter(this.prog, __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].LINK_STATUS)) {
-            throw __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getProgramInfoLog(this.prog);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].linkProgram(this.prog);
+        if (!__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].getProgramParameter(this.prog, __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].LINK_STATUS)) {
+            throw __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].getProgramInfoLog(this.prog);
         }
-        this.attrPos = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Pos");
-        this.attrNor = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Nor");
-        this.attrCol = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Col");
-        this.unifModel = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Model");
-        this.unifModelInvTr = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_ModelInvTr");
-        this.unifViewProj = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_ViewProj");
-        this.unifColor = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Color");
+        // Raymarcher only draws a quad in screen space! No other attributes
+        this.attrPos = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Pos");
+        // TODO: add other attributes here
+        this.unifView = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].getUniformLocation(this.prog, "u_View");
+        this.unifAspectRatio = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].getUniformLocation(this.prog, "u_AspectRatio");
+        this.unifTime = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Time");
     }
     use() {
         if (activeProgram !== this.prog) {
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].useProgram(this.prog);
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].useProgram(this.prog);
             activeProgram = this.prog;
         }
     }
-    setModelMatrix(model) {
+    // TODO: add functions to modify uniforms
+    setAspectRatio(size) {
         this.use();
-        if (this.unifModel !== -1) {
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniformMatrix4fv(this.unifModel, false, model);
-        }
-        if (this.unifModelInvTr !== -1) {
-            let modelinvtr = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].create();
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].transpose(modelinvtr, model);
-            __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["a" /* mat4 */].invert(modelinvtr, modelinvtr);
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniformMatrix4fv(this.unifModelInvTr, false, modelinvtr);
+        if (this.unifAspectRatio !== -1) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].uniform2fv(this.unifAspectRatio, size);
         }
     }
-    setViewProjMatrix(vp) {
+    setTime(time) {
         this.use();
-        if (this.unifViewProj !== -1) {
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniformMatrix4fv(this.unifViewProj, false, vp);
-        }
-    }
-    setGeometryColor(color) {
-        this.use();
-        if (this.unifColor !== -1) {
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].uniform4fv(this.unifColor, color);
+        if (this.unifTime !== -1) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].uniform1f(this.unifTime, time);
         }
     }
     draw(d) {
         this.use();
         if (this.attrPos != -1 && d.bindPos()) {
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].enableVertexAttribArray(this.attrPos);
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribPointer(this.attrPos, 4, __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].FLOAT, false, 0, 0);
-        }
-        if (this.attrNor != -1 && d.bindNor()) {
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].enableVertexAttribArray(this.attrNor);
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribPointer(this.attrNor, 4, __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].FLOAT, false, 0, 0);
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].enableVertexAttribArray(this.attrPos);
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].vertexAttribPointer(this.attrPos, 4, __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].FLOAT, false, 0, 0);
         }
         d.bindIdx();
-        __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].drawElements(d.drawMode(), d.elemCount(), __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].UNSIGNED_INT, 0);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].drawElements(d.drawMode(), d.elemCount(), __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].UNSIGNED_INT, 0);
         if (this.attrPos != -1)
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].disableVertexAttribArray(this.attrPos);
-        if (this.attrNor != -1)
-            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].disableVertexAttribArray(this.attrNor);
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].disableVertexAttribArray(this.attrPos);
     }
 }
 ;
@@ -15270,16 +15141,16 @@ class ShaderProgram {
 
 
 /***/ }),
-/* 65 */
-/***/ (function(module, exports) {
-
-module.exports = "#version 300 es\n\n//This is a vertex shader. While it is called a \"shader\" due to outdated conventions, this file\n//is used to apply matrix transformations to the arrays of vertex data passed to it.\n//Since this code is run on your GPU, each vertex is transformed simultaneously.\n//If it were run on your CPU, each vertex would have to be processed in a FOR loop, one at a time.\n//This simultaneous transformation allows your program to run much faster, especially when rendering\n//geometry with millions of vertices.\n\nuniform mat4 u_Model;       // The matrix that defines the transformation of the\n                            // object we're rendering. In this assignment,\n                            // this will be the result of traversing your scene graph.\n\nuniform mat4 u_ModelInvTr;  // The inverse transpose of the model matrix.\n                            // This allows us to transform the object's normals properly\n                            // if the object has been non-uniformly scaled.\n\nuniform mat4 u_ViewProj;    // The matrix that defines the camera's transformation.\n                            // We've written a static matrix for you to use for HW2,\n                            // but in HW3 you'll have to generate one yourself\n\nin vec4 vs_Pos;             // The array of vertex positions passed to the shader\n\nin vec4 vs_Nor;             // The array of vertex normals passed to the shader\n\nin vec4 vs_Col;             // The array of vertex colors passed to the shader.\n\nout vec4 fs_Nor;            // The array of normals that has been transformed by u_ModelInvTr. This is implicitly passed to the fragment shader.\nout vec4 fs_LightVec;       // The direction in which our virtual light lies, relative to each vertex. This is implicitly passed to the fragment shader.\nout vec4 fs_Col;            // The color of each vertex. This is implicitly passed to the fragment shader.\n\nconst vec4 lightPos = vec4(5, 5, 3, 1); //The position of our virtual light, which is used to compute the shading of\n                                        //the geometry in the fragment shader.\n\nvoid main()\n{\n    fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation\n\n    mat3 invTranspose = mat3(u_ModelInvTr);\n    fs_Nor = vec4(invTranspose * vec3(vs_Nor), 0);          // Pass the vertex normals to the fragment shader for interpolation.\n                                                            // Transform the geometry's normals by the inverse transpose of the\n                                                            // model matrix. This is necessary to ensure the normals remain\n                                                            // perpendicular to the surface after the surface is transformed by\n                                                            // the model matrix.\n\n\n    vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below\n\n    fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies\n\n    gl_Position = u_ViewProj * modelposition;// gl_Position is a built-in variable of OpenGL which is\n                                             // used to render the final positions of the geometry's vertices\n}\n"
-
-/***/ }),
 /* 66 */
 /***/ (function(module, exports) {
 
-module.exports = "#version 300 es\n\n// This is a fragment shader. If you've opened this file first, please\n// open and read lambert.vert.glsl before reading on.\n// Unlike the vertex shader, the fragment shader actually does compute\n// the shading of geometry. For every pixel in your program's output\n// screen, the fragment shader is run for every bit of geometry that\n// particular pixel overlaps. By implicitly interpolating the position\n// data passed into the fragment shader by the vertex shader, the fragment shader\n// can compute what color to apply to its pixel based on things like vertex\n// position, light position, and vertex color.\nprecision highp float;\n\nuniform vec4 u_Color; // The color with which to render this instance of geometry.\n\n// These are the interpolated values out of the rasterizer, so you can't know\n// their specific values without knowing the vertices that contributed to them\nin vec4 fs_Nor;\nin vec4 fs_LightVec;\nin vec4 fs_Col;\n\nout vec4 out_Col; // This is the final output color that you will see on your\n                  // screen for the pixel that is currently being processed.\n\nvoid main()\n{\n    // Material base color (before shading)\n        vec4 diffuseColor = u_Color;\n\n        // Calculate the diffuse term for Lambert shading\n        float diffuseTerm = dot(normalize(fs_Nor), normalize(fs_LightVec));\n        // Avoid negative lighting values\n        // diffuseTerm = clamp(diffuseTerm, 0, 1);\n\n        float ambientTerm = 0.2;\n\n        float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier\n                                                            //to simulate ambient lighting. This ensures that faces that are not\n                                                            //lit by our point light are not completely black.\n\n        // Compute final shaded color\n        out_Col = vec4(diffuseColor.rgb * lightIntensity, diffuseColor.a);\n}\n"
+module.exports = "#version 300 es\n\nprecision highp float;\n\nin vec4 vs_Pos;\nout vec4 fs_Pos;\n\nuniform vec2 u_AspectRatio;\n\nvoid main() {\n\tfs_Pos = vs_Pos;\n\tgl_Position = vs_Pos;\n}\n"
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports) {
+
+module.exports = "#version 300 es\n\nprecision highp float;\n\nuniform vec2 u_AspectRatio;\nuniform float u_Time;\n\nin vec4 fs_Pos;\nout vec4 out_Col;\n\nconst int MAX_MARCHING_STEPS = 255;\nconst float MIN_DIST = 0.0;\nconst float MAX_DIST = 100.0;\nconst float EPSILON = 0.0001;\n\nconst vec3 eye = vec3(12.0, 8.0, 10.0);\n\nstruct Intersection {\n\tfloat t;\n\tvec3 normal;\n\tvec3 color;\n\tint id;\n};\n\nmat3 rotateX(float theta) {\n    float c = cos(theta);\n    float s = sin(theta);\n    return mat3(\n        vec3(1, 0, 0),\n        vec3(0, c, -s),\n        vec3(0, s, c)\n    );\n}\n\nmat3 rotateY(float theta) {\n    float c = cos(theta);\n    float s = sin(theta);\n    return mat3(\n        vec3(c, 0, s),\n        vec3(0, 1, 0),\n        vec3(-s, 0, c)\n    );\n}\n\nmat3 rotateZ(float theta) {\n    float c = cos(theta);\n    float s = sin(theta);\n    return mat3(\n        vec3(c, -s, 0),\n        vec3(s, c, 0),\n        vec3(0, 0, 1)\n    );\n}\n\nfloat intersectSDF(float distA, float distB) {\n    return max(distA, distB);\n}\n\nfloat unionSDF(float distA, float distB) {\n    return min(distA, distB);\n}\n\nfloat differenceSDF(float distA, float distB) {\n    return max(distA, -distB);\n}\n\n// polynomial smooth min (k = 0.1);\nfloat smin1( float a, float b, float k ) {\n    float h = clamp(0.5+0.5*(b-a)/k, 0.0, 1.0);\n    return mix(b, a, h) - k*h*(1.0-h);\n}\n\nfloat smoothUnionSDF(float distA, float distB) {\n    return smin1(distA, distB, 0.3);\n}\n\n/**\n * Signed distance function for a sphere centered at the origin with radius r\n */\nfloat sphereSDF(vec3 p, float r) {\n\treturn length(p) - r;\n}\n\nfloat boxSDF(vec3 p, vec3 b) {\n  vec3 d = abs(p) - b;\n  return min(max(d.x,max(d.y,d.z)),0.0) + length(max(d,0.0));\n}\n\nfloat udRoundBox(vec3 p, vec3 b, float r) {\n  return length(max(abs(p)-b,0.0))-r;\n}\n\n/**\n * Signed distance function for a cube centered at the origin\n * with width = height = length = 2.0\n */\nfloat cubeSDF(vec3 p) {\n    // If d.x < 0, then -1 < p.x < 1, and same logic applies to p.y, p.z\n    // So if all components of d are negative, then p is inside the unit cube\n    vec3 d = abs(p) - vec3(1.0, 1.0, 1.0);\n    \n    // Assuming p is inside the cube, how far is it from the surface?\n    // Result will be negative or zero.\n    float insideDistance = min(max(d.x, max(d.y, d.z)), 0.0);\n    \n    // Assuming p is outside the cube, how far is it from the surface?\n    // Result will be positive or zero.\n    float outsideDistance = length(max(d, 0.0));\n    \n    return insideDistance + outsideDistance;\n}\n\n/**\n * Signed distance function for an XY aligned cylinder centered at the origin with\n * height h and radius r.\n */\nfloat cylinderSDF(vec3 p, float h, float r) {\n    // How far inside or outside the cylinder the point is, radially\n    float inOutRadius = length(p.xy) - r;\n    \n    // How far inside or outside the cylinder is, axially aligned with the cylinder\n    float inOutHeight = abs(p.z) - h/2.0;\n    \n    // Assuming p is inside the cylinder, how far is it from the surface?\n    // Result will be negative or zero.\n    float insideDistance = min(max(inOutRadius, inOutHeight), 0.0);\n\n    // Assuming p is outside the cylinder, how far is it from the surface?\n    // Result will be positive or zero.\n    float outsideDistance = length(max(vec2(inOutRadius, inOutHeight), 0.0));\n    \n    return insideDistance + outsideDistance;\n}\n\nfloat cappedCylinderSDF( vec3 p, vec2 h )\n{\n  vec2 d = abs(vec2(length(p.xz),p.y)) - h;\n  return min(max(d.x,d.y),0.0) + length(max(d,0.0));\n}\n\nfloat toastSDF(vec3 p) {\n\tfloat toastCylinder1 = cylinderSDF((rotateY(1.5708) * p) + vec3(0.5, -2.0, 0.0), 0.3, 0.6);\n\tfloat toastCylinder2 = cylinderSDF((rotateY(1.5708) * p) + vec3(-0.5, -2.0, 0.0), 0.3, 0.6);\n\tfloat toastCylinders = unionSDF(toastCylinder1, toastCylinder2);\n\tfloat toastBody = boxSDF(p + vec3(0.0, -1.3, 0.0), vec3(0.15, 0.6, 1.0));\n\treturn unionSDF(toastCylinders, toastBody);\n}\n\nfloat repeatToastSDF(vec3 p, vec3 c) {\n    vec3 q = mod(p,c)-0.5*c;\n    return toastSDF(q);\n}\n\nfloat wheelHoleSDF(vec3 p) {\n\treturn cylinderSDF(rotateY(1.5708) * p, 0.5, 0.6);\n}\n\nfloat ellipsoidSDF(vec3 p, vec3 r) {\n    return (length( p/r ) - 1.0) * min(min(r.x,r.y),r.z);\n}\n\nfloat toasterBodySDF(vec3 p) {\n\tfloat roundBoxDist = udRoundBox(p, vec3(1.0, 1.1, 1.8), 0.2);\n\tfloat hole1Dist = udRoundBox(p + vec3(-0.4, -0.2, 0.0), vec3(0.2, 1.1, 1.5), 0.05);\n\tfloat hole2Dist = udRoundBox(p + vec3(0.4, -0.2, 0.0), vec3(0.2, 1.1, 1.5), 0.05);\n\tfloat holesDist = unionSDF(hole1Dist, hole2Dist);\n\tfloat leverHoleDist = boxSDF(p + vec3(0.0, -0.2, -1.8), vec3(0.05, 0.6, 0.3));\n\tholesDist = unionSDF(holesDist, leverHoleDist);\n\tfloat toaster =  differenceSDF(roundBoxDist, holesDist);\n\n\tfloat toasterMinus = boxSDF(p + vec3(0.0, 1.2, 0.0), vec3(1.4, 0.125, 2.1));\n\ttoaster = differenceSDF(toaster, toasterMinus);\n\n\tfloat wheelHole1 = wheelHoleSDF(p + vec3(-1.0, 0.9, 0.9));\n\tfloat wheelHole2 = wheelHoleSDF(p + vec3(-1.0, 0.9, -0.9));\n\tfloat wheelHole3 = wheelHoleSDF(p + vec3(1.0, 0.9, 0.9));\n\tfloat wheelHole4 = wheelHoleSDF(p + vec3(1.0, 0.9, -0.9));\n\tfloat wheelHoles = unionSDF(unionSDF(wheelHole1, wheelHole2), unionSDF(wheelHole3, wheelHole4));\n\ttoaster = differenceSDF(toaster, wheelHoles);\n\n\tfloat PI = 3.14159;\n\tfloat x = fract(u_Time) * (2.0 * PI);\n\tfloat leverHeight = 0.5 * (0.5 -((2.0*floor(x/(2.0*PI)) - floor(2.0*(x/(2.0*PI))) + 1.0)*(sin(-(x-(PI/2.0)))+1.0) + \n\t\t2.0*fract(x/(PI / 2.0)) * (2.0*floor((x-PI)/(2.0*PI)) - floor(2.0*((x-PI)/(2.0*PI))) + 1.0) * \n\t\t(2.0*floor((x+(PI/2.0))/(PI)) - floor(2.0*((x+(PI/2.0))/(PI))) + 1.0))); \n\tfloat leverHandle = udRoundBox(p + vec3(0.0, leverHeight, -2.15), vec3(0.2, 0.06, 0.05), 0.1);\n\t\n\ttoaster = unionSDF(toaster, leverHandle);\n\n\tfloat dial = cylinderSDF(rotateZ(-0.61) * (p + vec3(-0.65, 0.6, -1.95)), 0.3, 0.2);\n\tfloat dialHandle = boxSDF(rotateZ(-0.61) * (p + vec3(-0.65, 0.6, -2.05)), vec3(0.18, 0.02, 0.2));\n\tdial = smoothUnionSDF(dial, dialHandle);\n\n\ttoaster = unionSDF(toaster, dial);\n\n\tfloat plugHead = ellipsoidSDF(p + vec3(-0.75, 0.4, 4.9), vec3(0.35, 0.3, 0.5));\n\tfloat plugHeadSubtract = boxSDF(p + vec3(-0.75, 0.4, 5.3), vec3(0.5, 0.5, 0.4));\n\tplugHead = differenceSDF(plugHead, plugHeadSubtract);\n\tfloat plugHeadIntersect = boxSDF(p + vec3(-0.75, 0.4, 4.6), vec3(0.5, 0.25, 0.9));\n\tplugHead = intersectSDF(plugHead, plugHeadIntersect);\n\tfloat plugCord = cylinderSDF(p + vec3(-0.75, 0.4, 3.5), 3.0, 0.08);\n\tfloat plug = smoothUnionSDF(plugHead, plugCord);\n\ttoaster = unionSDF(toaster, plug);\n\n\treturn toaster;\n}\n\nfloat wheelSDF(vec3 p) {\n\treturn cylinderSDF(rotateY(1.5708) * p, 0.5, 0.5);\n}\n\nfloat wheelTreadSDF(vec3 p) {\n\treturn cylinderSDF((rotateY(1.5708) * p) + vec3(0.9, 0.9, 0.0), 3.0, 0.05);\n}\n\nvec3 mod3(vec3 p, vec3 c) {\n\treturn vec3(mod(p.x, c.x), mod(p.y, c.y), mod(p.z, c.z));\n}\n\nfloat repeatWheelTreadSDF(vec3 p, vec3 c) {\n\tvec3 q = mod3(p, c) - 0.5 * c;\n    return wheelTreadSDF(rotateX(0.1) * q);\n}\n\nfloat planeSDF(vec3 p, vec4 n){\n  return dot(p,n.xyz) + n.w;\n}\n\nfloat sinc( float x, float k ) {\n    float a = 3.14159 * (float(k)*x-1.0);\n    return sin(a)/a;\n}\n\nfloat outletSDF(vec3 p) {\n\tfloat outletCover = udRoundBox(p + vec3(0.0, 0.0, 5.0), vec3(0.5, 0.9, 0.01), 0.05);\n\n\tfloat outletSphereSubtract1 = sphereSDF(p + vec3(0.0, 0.4, 4.95), 0.3);\n\tfloat outletBoxSubtract1 = boxSDF(p + vec3(0.0, 0.4, 4.95), vec3(0.5, 0.25, 0.1));\n\tfloat outletThingSubtract1 = intersectSDF(outletSphereSubtract1, outletBoxSubtract1);\n\tfloat outletSphereSubtract2 = sphereSDF(p + vec3(0.0, -0.4, 4.95), 0.3);\n\tfloat outletBoxSubtract2 = boxSDF(p + vec3(0.0, -0.4, 4.95), vec3(0.5, 0.25, 0.1));\n\tfloat outletThingSubtract2 = intersectSDF(outletSphereSubtract2, outletBoxSubtract2);\n\tfloat outletThingSubtract = unionSDF(outletThingSubtract1, outletThingSubtract2);\n\n\tfloat outlet = differenceSDF(outletCover, outletThingSubtract);\n\n\tfloat outletSphereUnion1 = sphereSDF(p + vec3(0.0, 0.4, 4.95), 0.28);\n\tfloat outletBoxUnion1 = boxSDF(p + vec3(0.0, 0.4, 4.95), vec3(0.5, 0.23, 0.05));\n\tfloat outletThingUnion1  = intersectSDF(outletSphereUnion1, outletBoxUnion1);\n\tfloat outletHole1_1 = boxSDF(p + vec3(0.1, 0.4, 4.9), vec3(0.03, 0.1, 0.05));\n\tfloat outletHole1_2 = boxSDF(p + vec3(-0.1, 0.4, 4.9), vec3(0.03, 0.1, 0.05));\n\tfloat outletHoles1 = unionSDF(outletHole1_1, outletHole1_2);\n\toutletThingUnion1 = differenceSDF(outletThingUnion1, outletHoles1);\n\n\tfloat outletSphereUnion2 = sphereSDF(p + vec3(0.0, -0.4, 4.95), 0.28);\n\tfloat outletBoxUnion2 = boxSDF(p + vec3(0.0, -0.4, 4.95), vec3(0.5, 0.23, 0.05));\n\tfloat outletThingUnion2  = intersectSDF(outletSphereUnion2, outletBoxUnion2);\n\tfloat outletHole2_1 = boxSDF(p + vec3(0.1, -0.4, 4.9), vec3(0.03, 0.1, 0.05));\n\tfloat outletHole2_2 = boxSDF(p + vec3(-0.1, -0.4, 4.9), vec3(0.03, 0.1, 0.05));\n\tfloat outletHoles2 = unionSDF(outletHole2_1, outletHole2_2);\n\toutletThingUnion2 = differenceSDF(outletThingUnion2, outletHoles2);\n\t\n\tfloat outletThingUnion = unionSDF(outletThingUnion1, outletThingUnion2);\n\n\toutlet = unionSDF(outlet, outletThingUnion);\n\n\treturn outlet;\n}\n\nfloat repeatOutletSDF(vec3 p, vec3 c) {\n\tvec3 q = mod3(p, c) - 0.5 * c;\n    return outletSDF(q);\n}\n\nfloat animatedToastsSDF(vec3 p) {\n\tfloat PI = 3.14159;\n\tfloat x = fract(u_Time) * (2.0 * PI);\n\tfloat toastHeight = 1.0 + -((2.0*floor(x/(2.0*PI)) - floor(2.0*(x/(2.0*PI))) + 1.0)*(sin(-(x-(PI/2.0)))+1.0) + \n\t\t2.0*fract(x/(PI / 2.0)) * (2.0*floor((x-PI)/(2.0*PI)) - floor(2.0*((x-PI)/(2.0*PI))) + 1.0) * \n\t\t(2.0*floor((x+(PI/2.0))/(PI)) - floor(2.0*((x+(PI/2.0))/(PI))) + 1.0));\n\tfloat toast1 = toastSDF(p + vec3(0.4, toastHeight, 0.0));\n\tfloat toast2 = toastSDF(p + vec3(-0.4, toastHeight, 0.0));\n\n\treturn unionSDF(toast1, toast2);\n}\n\nfloat sceneSDF(vec3 p) {\n\tfloat toasterBodyJitter = 0.03 * sin(u_Time * 125.0);\n\tfloat toaster = toasterBodySDF(p + vec3(0.0, 0.0, toasterBodyJitter));\n\n\tfloat wheelSpoke1 = cylinderSDF((rotateY(1.5708) * p) + vec3(0.9, 0.9, 0.0), 2.7, 0.1);\n\tfloat wheelSpoke2 = cylinderSDF((rotateY(1.5708) * p) + vec3(-0.9, 0.9, 0.0), 2.7, 0.1);\n\ttoaster = unionSDF(toaster, unionSDF(wheelSpoke1, wheelSpoke2));\n\n\tmat3 rotateWheels = rotateX(10.0 * u_Time);\n\tfloat wheel1 = wheelSDF(rotateWheels * (p + vec3(1.0, 0.9, 0.9)));\n\tfloat wheel2 = wheelSDF(rotateWheels * (p + vec3(-1.0, 0.9, -0.9)));\n\tfloat wheel3 = wheelSDF(rotateWheels * (p + vec3(-1.0, 0.9, 0.9)));\n\tfloat wheel4 = wheelSDF(rotateWheels * (p + vec3(1.0, 0.9, -0.9)));\n\n\tfloat wheels = unionSDF(unionSDF(wheel1, wheel2), unionSDF(wheel3, wheel4));\n\ttoaster = unionSDF(toaster, wheels);\n\n\tfloat toast = animatedToastsSDF(p);\n\n\tfloat outlets = repeatOutletSDF(p, vec3(1.5, 0.0, 0.0));\n\treturn unionSDF(toaster, outlets);\n}\n\nvec3 estimateSceneNormal(vec3 p) {\n    return normalize(vec3(\n        sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),\n        sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),\n        sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))\n    ));\n}\n\nvec3 estimateToastsNormal(vec3 p) {\n    return normalize(vec3(\n        animatedToastsSDF(vec3(p.x + EPSILON, p.y, p.z)) - animatedToastsSDF(vec3(p.x - EPSILON, p.y, p.z)),\n        animatedToastsSDF(vec3(p.x, p.y + EPSILON, p.z)) - animatedToastsSDF(vec3(p.x, p.y - EPSILON, p.z)),\n        animatedToastsSDF(vec3(p.x, p.y, p.z  + EPSILON)) - animatedToastsSDF(vec3(p.x, p.y, p.z - EPSILON))\n    ));\n}\n\nvec3 phongContribForLight(vec3 k_d, vec3 k_s, float alpha, vec3 p,\n                          vec3 lightPos, vec3 lightIntensity) {\n    vec3 N = estimateSceneNormal(p);\n    vec3 L = normalize(lightPos - p);\n    vec3 V = normalize(eye - p);\n    vec3 R = normalize(reflect(-L, N));\n    \n    float dotLN = dot(L, N);\n    float dotRV = dot(R, V);\n    \n    if (dotLN < 0.0) {\n        return vec3(0.0, 0.0, 0.0);\n    } \n    \n    if (dotRV < 0.0) {\n        return lightIntensity * (k_d * dotLN); // it's just a lambert\n    }\n    return lightIntensity * (k_d * dotLN + k_s * pow(dotRV, alpha));\n}\n\n\nvec3 toasterPhong(vec3 p) {\n    vec3 k_a = vec3(0.1, 0.1, 0.1);\n    vec3 k_d = vec3(0.65, 0.65, 0.65);\n    vec3 k_s = vec3(1.0, 1.0, 1.0);\n    float shininess = 64.0;\n\n    const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);\n    vec3 color = ambientLight * k_a;\n    \n    vec3 light1Pos = vec3(4.0 * sin(u_Time), 2.0, 4.0 * cos(u_Time));\n    vec3 light1Intensity = vec3(0.4, 0.4, 0.4);\n    \n    color += phongContribForLight(k_d, k_s, shininess, p,\n                                  light1Pos,\n                                  light1Intensity);\n    \n    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time),\n                          2.0 * cos(0.37 * u_Time),\n                          2.0);\n    vec3 light2Intensity = vec3(0.4, 0.4, 0.4);\n    \n    color += phongContribForLight(k_d, k_s, shininess, p,\n                                  light2Pos,\n                                  light2Intensity);    \n    return color;\n}\n\nvec3 lambertContribForLight(vec3 k_d, vec3 p,\n                          vec3 lightPos, vec3 lightIntensity) {\n    vec3 N = estimateToastsNormal(p);\n    vec3 L = normalize(lightPos - p);\n    \n    float dotLN = dot(L, N);\n    \n    if (dotLN < 0.0) {\n        return vec3(0.0, 0.0, 0.0);\n    } \n\n    return lightIntensity * (k_d * dotLN);\n}\n\nvec3 toastLambert(vec3 p) {\n    vec3 k_a = vec3(0.1, 0.1, 0.1);\n    vec3 k_d = vec3(1.0, 0.8, 0.6);\n    \n    const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);\n    vec3 color = ambientLight * k_a;\n    \n    vec3 light1Pos = vec3(4.0 * sin(u_Time), 2.0, 4.0 * cos(u_Time));\n    vec3 light1Intensity = vec3(0.4, 0.4, 0.4);\n    \n    color += lambertContribForLight(k_d, p, light1Pos, light1Intensity);\n    \n    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time),\n                          2.0 * cos(0.37 * u_Time),\n                          2.0);\n    vec3 light2Intensity = vec3(0.4, 0.4, 0.4);\n    \n    color += lambertContribForLight(k_d, p,\n                                  light2Pos,\n                                  light2Intensity);    \n    return color;\n}\n\nIntersection sceneIntersection(vec3 p) {\n\tIntersection i;\n\ti.t = sceneSDF(p);\n\ti.normal = estimateSceneNormal(p);\n\ti.color = toasterPhong(p);\n\ti.id = 1;\n\n\treturn i;\n}\n\nIntersection toastIntersection(vec3 p) {\n\tIntersection i;\n\ti.t = animatedToastsSDF(p);\n\ti.normal = estimateToastsNormal(p);\n\ti.color = toastLambert(p);\n\ti.id = 2;\n\n\treturn i;\n}\n\nfloat toastAndSceneSDF(vec3 p) {\n\treturn unionSDF(sceneSDF(p), animatedToastsSDF(p));\n}\n\n// returns union of toast and scene\nIntersection toastAndSceneIntersection(vec3 p) {\n\tIntersection scene = sceneIntersection(p);\n\tIntersection toast = toastIntersection(p);\n\n\tIntersection final;\n\n\tIntersection minI = scene;\n\tif (scene.t > toast.t) {\n\t\tminI = toast;\n\t}\n\n\tfinal.t = minI.t;\n\tfinal.normal = minI.normal;\n\tfinal.color = minI.color;\n\tfinal.id = minI.id;\n\n\treturn final;\n\n}\n\nfloat shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end) {\n    float depth = start;\n    for (int i = 0; i < MAX_MARCHING_STEPS; i++) {\n        float dist = toastAndSceneSDF(eye + depth * marchingDirection);\n        if (dist < EPSILON) {\n\t\t\treturn depth;\n        }\n        depth += dist;\n        if (depth >= end) {\n            return end;\n        }\n    }\n    return end;\n}\n            \nvec3 getRayDirection(float fieldOfView, vec2 size, vec2 fragCoord) {\n    vec2 xy = fragCoord - size / 2.0;\n    float z = size.y / tan(radians(fieldOfView) / 2.0);\n    return normalize(vec3(xy, -z));\n}\n\nmat4 getViewMatrix(vec3 eye, vec3 center, vec3 up) {\n    // Based on gluLookAt man page\n    vec3 f = normalize(center - eye);\n    vec3 s = normalize(cross(f, up));\n    vec3 u = cross(s, f);\n    return mat4(\n        vec4(s, 0.0),\n        vec4(u, 0.0),\n        vec4(-f, 0.0),\n        vec4(0.0, 0.0, 0.0, 1)\n    );\n}\n\nmat2 rotate2D(float angle) { \n    return mat2(cos(angle), -sin(angle), sin(angle), cos(angle)); \n}\n\nvoid main() {\n    // frag coord now represents window width/height\n\tvec2 fragCoord = ((fs_Pos.xy + 1.0) / 2.0) * u_AspectRatio.xy;\n\t\n\tvec3 viewDir = getRayDirection(45.0, u_AspectRatio.xy, fragCoord);\n    \n    mat4 viewToWorld = getViewMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));\n    vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;\n    \n    float dist = shortestDistanceToSurface(eye, worldDir, MIN_DIST, MAX_DIST);\n\n    if (dist > MAX_DIST - EPSILON) {\n        // Didn't hit anything so show background\n\n        vec2 pos = (fragCoord.xy - 0.5 * u_AspectRatio.xy) / u_AspectRatio.y;\n        vec2 rotatedPos = rotate2D(0.6) * pos;\n                    \n        float xMax = 0.5 * u_AspectRatio.x / u_AspectRatio.y;\n        \n        // simulate moving stripes in bg\n        float stripesMask = step(0.25, mod(rotatedPos.x - u_Time, 0.5));\n        \n        vec3 stripeColor = vec3(0.7, 0.5, 0.2);\n        vec3 frag = stripeColor;\n\n        frag -= 0.1 * stripesMask;\t\n        frag -= smoothstep(0.45, 2.5, length(pos));\n\n        out_Col = vec4(vec3(frag), 1.0);\n\t\treturn;\n\t}\n    \n    // The closest point on the surface to the eyepoint along the view ray\n    vec3 p = eye + dist * worldDir;\n\n    // get intersection of entire scene\n\tIntersection i = toastAndSceneIntersection(p);\n\t\n    // get color\n\tvec3 color = i.color;\n\n\t// NOW LET'S REFLECT THAT RAY (but not for the toast)\n\t//if (i.id == 1) { // use ID to see if toast or not \n\t\tworldDir = reflect(worldDir, i.normal); // reflect ray\n        // send off from intersection point\n\t\tdist = shortestDistanceToSurface(p + worldDir * 0.001, worldDir, MIN_DIST, MAX_DIST);\n        // calculate new point of intersection\n\t\tp = (p + worldDir * 0.001) + dist * worldDir;\n\t\ti = toastAndSceneIntersection(p);\n\n        // add reflection color\n\t\tcolor += i.color * 0.35; \n\t//}\n    \n    out_Col = vec4(color, 1.0);\n\n}\n"
 
 /***/ })
 /******/ ]);
