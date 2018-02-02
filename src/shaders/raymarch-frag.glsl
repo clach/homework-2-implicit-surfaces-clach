@@ -13,7 +13,7 @@ const float MIN_DIST = 0.0;
 const float MAX_DIST = 100.0;
 const float EPSILON = 0.0001;
 
-const vec3 eye = vec3(15.0, 10.0, 7.0);
+const vec3 eye = vec3(12.0, 8.0, 10.0);
 
 struct Intersection {
 	float t;
@@ -225,6 +225,10 @@ float wheelHoleSDF(vec3 p) {
 	return cylinderSDF(rotateY(1.5708) * p, 0.5, 0.6);
 }
 
+float ellipsoidSDF(vec3 p, vec3 r) {
+    return (length( p/r ) - 1.0) * min(min(r.x,r.y),r.z);
+}
+
 float toasterBodySDF(vec3 p) {
 	float roundBoxDist = udRoundBox(p, vec3(1.0, 1.1, 1.8), 0.2);
 	float hole1Dist = udRoundBox(p + vec3(-0.4, -0.2, 0.0), vec3(0.2, 1.1, 1.5), 0.05);
@@ -258,6 +262,15 @@ float toasterBodySDF(vec3 p) {
 	dial = smoothUnionSDF(dial, dialHandle);
 
 	toaster = unionSDF(toaster, dial);
+
+	float plugHead = ellipsoidSDF(p + vec3(-0.75, 0.4, 4.9), vec3(0.35, 0.3, 0.5));
+	float plugHeadSubtract = boxSDF(p + vec3(-0.75, 0.4, 5.3), vec3(0.5, 0.5, 0.4));
+	plugHead = differenceSDF(plugHead, plugHeadSubtract);
+	float plugHeadIntersect = boxSDF(p + vec3(-0.75, 0.4, 4.6), vec3(0.5, 0.25, 0.9));
+	plugHead = intersectSDF(plugHead, plugHeadIntersect);
+	float plugCord = cylinderSDF(p + vec3(-0.75, 0.4, 3.5), 3.0, 0.08);
+	float plug = smoothUnionSDF(plugHead, plugCord);
+	toaster = unionSDF(toaster, plug);
 
 	return toaster;
 }
@@ -329,6 +342,18 @@ float repeatOutletSDF(vec3 p, vec3 c) {
     return outletSDF(q);
 }
 
+float animatedToastsSDF(vec3 p) {
+	float PI = 3.14159;
+	float x = fract(u_Time) * (2.0 * PI);
+	float toastHeight = 1.0 + -((2.0*floor(x/(2.0*PI)) - floor(2.0*(x/(2.0*PI))) + 1.0)*(sin(-(x-(PI/2.0)))+1.0) + 
+		2.0*fract(x/(PI / 2.0)) * (2.0*floor((x-PI)/(2.0*PI)) - floor(2.0*((x-PI)/(2.0*PI))) + 1.0) * 
+		(2.0*floor((x+(PI/2.0))/(PI)) - floor(2.0*((x+(PI/2.0))/(PI))) + 1.0));
+	float toast1 = toastSDF(p + vec3(0.4, toastHeight, 0.0));
+	float toast2 = toastSDF(p + vec3(-0.4, toastHeight, 0.0));
+
+	return unionSDF(toast1, toast2);
+}
+
 float sceneSDF(vec3 p) {
 	float toasterBodyJitter = 0.03 * sin(u_Time * 125.0);
 	float toaster = toasterBodySDF(p + vec3(0.0, 0.0, toasterBodyJitter));
@@ -337,10 +362,12 @@ float sceneSDF(vec3 p) {
 	float wheelSpoke2 = cylinderSDF((rotateY(1.5708) * p) + vec3(-0.9, 0.9, 0.0), 2.7, 0.1);
 	toaster = unionSDF(toaster, unionSDF(wheelSpoke1, wheelSpoke2));
 
-	float wheel1 = wheelSDF(p + vec3(1.0, 0.9, 0.9));
-	float wheel2 = wheelSDF(p + vec3(-1.0, 0.9, -0.9));
-	float wheel3 = wheelSDF(p + vec3(-1.0, 0.9, 0.9));
-	float wheel4 = wheelSDF(p + vec3(1.0, 0.9, -0.9));
+
+	mat3 rotateWheels = rotateX(10.0 * u_Time);
+	float wheel1 = wheelSDF(rotateWheels * (p + vec3(1.0, 0.9, 0.9)));
+	float wheel2 = wheelSDF(rotateWheels * (p + vec3(-1.0, 0.9, -0.9)));
+	float wheel3 = wheelSDF(rotateWheels * (p + vec3(-1.0, 0.9, 0.9)));
+	float wheel4 = wheelSDF(rotateWheels * (p + vec3(1.0, 0.9, -0.9)));
 
 	//float wheelTreads = repeatWheelTreadSDF(p, vec3(0.0, 2.0, 2.0));
 	//wheel1 = unionSDF(wheel1, wheelTreads);
@@ -348,14 +375,8 @@ float sceneSDF(vec3 p) {
 	float wheels = unionSDF(unionSDF(wheel1, wheel2), unionSDF(wheel3, wheel4));
 	toaster = unionSDF(toaster, wheels);
 
-	float PI = 3.14159;
-	float x = fract(u_Time) * (2.0 * PI);
-	float toastHeight = 1.0 + -((2.0*floor(x/(2.0*PI)) - floor(2.0*(x/(2.0*PI))) + 1.0)*(sin(-(x-(PI/2.0)))+1.0) + 
-		2.0*fract(x/(PI / 2.0)) * (2.0*floor((x-PI)/(2.0*PI)) - floor(2.0*((x-PI)/(2.0*PI))) + 1.0) * 
-		(2.0*floor((x+(PI/2.0))/(PI)) - floor(2.0*((x+(PI/2.0))/(PI))) + 1.0));
-	float toast1 = toastSDF(p + vec3(0.4, toastHeight, 0.0));
-	float toast2 = toastSDF(p + vec3(-0.4, toastHeight, 0.0));
-	float toasterWithToast = unionSDF(toaster, unionSDF(toast1, toast2));
+	float toast = animatedToastsSDF(p);
+	float toasterWithToast = unionSDF(toaster, toast);
 
 	//float floor = planeSDF(p + vec3(0.0, 5.0, 0.0), normalize(vec4(0.0, 1.0, 0.0, 1.0)));
 	//float wall1 = planeSDF(p + vec3(15.0, 0.0, 0.0), normalize(vec4(1.0, 0.0, 0.0, 1.0)));
@@ -363,7 +384,7 @@ float sceneSDF(vec3 p) {
 	//return unionSDF(unionSDF(floor, unionSDF(wall1, wall2)), toasterWithToast);
 
 	//vec3 specialP = vec3(p.x + u_Time, p.x, p.z);
-	float outlets = repeatOutletSDF(p, vec3(2.0, 0.0, 0.0));
+	float outlets = repeatOutletSDF(p, vec3(1.5, 0.0, 0.0));
 	return unionSDF(toasterWithToast, outlets);
 
 }
@@ -474,15 +495,15 @@ vec3 phongIllumination(vec3 k_a, vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 e
     const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);
     vec3 color = ambientLight * k_a;
     
-    vec3 light1Pos = vec3(4.0 * sin(u_Time * 0.01), 2.0, 4.0 * cos(u_Time * 0.01));
+    vec3 light1Pos = vec3(4.0 * sin(u_Time), 2.0, 4.0 * cos(u_Time));
     vec3 light1Intensity = vec3(0.4, 0.4, 0.4);
     
     color += phongContribForLight(k_d, k_s, alpha, p, eye,
                                   light1Pos,
                                   light1Intensity);
     
-    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time * 0.01),
-                          2.0 * cos(0.37 * u_Time * 0.01),
+    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time),
+                          2.0 * cos(0.37 * u_Time),
                           2.0);
     vec3 light2Intensity = vec3(0.4, 0.4, 0.4);
     
@@ -533,37 +554,32 @@ void main() {
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     
     float dist = shortestDistanceToSurface(eye, worldDir, MIN_DIST, MAX_DIST);
-	vec2 r =  2.0 * vec2(fragCoord.xy - 0.5 * u_AspectRatio.xy) / u_AspectRatio.y;
-    
-	vec3 col1 = vec3(0.216, 0.471, 0.698); // blue
-	float xMax = u_AspectRatio.x / u_AspectRatio.y;
+
     if (dist > MAX_DIST - EPSILON) {
         // Didn't hit anything
 		// background
-		vec3 ret = vec3(0.1);
-		for(float i = -1.0; i < 1.0; i+= 0.2) {
-			float x = (fract(2.0 * u_Time) * 2.0) - 1.0;
-			// y coordinate is the loop value
-			float y = i;
-			vec2 s = r - vec2(x, y);
-
-			ret = mix(ret, col1, rect(s, vec2(-0.5, -0.06), vec2(0.5, 0.06)));
-		}
-		out_Col = vec4(ret, 1.0);
-        //out_Col = vec4(0.0, 0.0, 0.0, 1.0);
+		out_Col = vec4(0.0, 0.0, 0.0, 1.0);
 		return;
-    }
+	}
     
     // The closest point on the surface to the eyepoint along the view ray
     vec3 p = eye + dist * worldDir;
-    
-    // Use the surface normal as the ambient color of the material
-    vec3 K_a = (estimateNormal(p) + vec3(1.0)) / 2.0;
-    vec3 K_d = K_a;
+
+	vec3 K_a = vec3(0.1, 0.1, 0.1);
+    vec3 K_d = vec3(0.5, 0.5, 0.5);
     vec3 K_s = vec3(1.0, 1.0, 1.0);
-    float shininess = 10.0;
+    float shininess = 64.0;
     
     vec3 color = phongIllumination(K_a, K_d, K_s, shininess, p, eye);
+
+
+	// NOW LET'S REFLECT THAT RAY
+	worldDir = reflect(worldDir, estimateNormal(p));
+	dist = shortestDistanceToSurface(p + worldDir * 0.001, worldDir, MIN_DIST, MAX_DIST);
+
+    p = (p + worldDir * 0.001) + dist * worldDir;
+
+	color += phongIllumination(K_a, K_d, K_s, shininess, p, eye) * 0.35;    
     
     out_Col = vec4(color, 1.0);
 
