@@ -1,6 +1,11 @@
 # CIS-566-Project-2
 https://github.com/CIS-566-2018/homework-2-ray-marching-implicit-surfaces
 
+## Caroline Lachanski's Results:
+I got my link actually working :')
+But I couldn't figure out how to make the toast non-shiny :'(
+https://clach.github.io/homework-2-implicit-surfaces-clach/
+
 ## Objective
 - Gain more experience with GLSL Shader writing and raymarching
 - Experiment with procedural modeling and animation of scenes
