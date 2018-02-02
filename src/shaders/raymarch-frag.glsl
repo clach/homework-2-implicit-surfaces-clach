@@ -19,11 +19,9 @@ struct Intersection {
 	float t;
 	vec3 normal;
 	vec3 color;
+	int id;
 };
 
-/**
- * Rotation matrix around the X axis.
- */
 mat3 rotateX(float theta) {
     float c = cos(theta);
     float s = sin(theta);
@@ -34,9 +32,6 @@ mat3 rotateX(float theta) {
     );
 }
 
-/**
- * Rotation matrix around the Y axis.
- */
 mat3 rotateY(float theta) {
     float c = cos(theta);
     float s = sin(theta);
@@ -47,9 +42,6 @@ mat3 rotateY(float theta) {
     );
 }
 
-/**
- * Rotation matrix around the Z axis.
- */
 mat3 rotateZ(float theta) {
     float c = cos(theta);
     float s = sin(theta);
@@ -68,15 +60,6 @@ float unionSDF(float distA, float distB) {
     return min(distA, distB);
 }
 
-/*
-float unionIntersection(Intersection distA, Intersection distB) {
-	Intersection i;
-	i.t = unionSDF(distA.t, distB.t);
-	i.normal =
-
-    return min(distA.t, distB.t);
-}*/
-
 float differenceSDF(float distA, float distB) {
     return max(distA, -distB);
 }
@@ -87,24 +70,9 @@ float smin1( float a, float b, float k ) {
     return mix(b, a, h) - k*h*(1.0-h);
 }
 
-// exponential smooth min (k = 32);
-float smin2( float a, float b, float k )
-{
-    float res = exp( -k*a ) + exp( -k*b );
-    return -log( res )/k;
-}
-
-// power smooth min (k = 8);
-float smin3( float a, float b, float k )
-{
-    a = pow( a, k ); b = pow( b, k );
-    return pow( (a*b)/(a+b), 1.0/k );
-}
-
 float smoothUnionSDF(float distA, float distB) {
     return smin1(distA, distB, 0.3);
 }
-
 
 /**
  * Signed distance function for a sphere centered at the origin with radius r
@@ -113,47 +81,9 @@ float sphereSDF(vec3 p, float r) {
 	return length(p) - r;
 }
 
-Intersection sphereSDFIntersection(vec3 p, float r) {
-	Intersection i;
-	i.t = sphereSDF(p, r);
-	/*
-	i.normal = normalize(vec3(
-        sphereSDF(vec3(p.x + EPSILON, p.y, p.z)) - sphereSDF(vec3(p.x - EPSILON, p.y, p.z)),
-        sphereSDF(vec3(p.x, p.y + EPSILON, p.z)) - sphereSDF(vec3(p.x, p.y - EPSILON, p.z)),
-        sphereSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sphereSDF(vec3(p.x, p.y, p.z - EPSILON))));
-	*/
-	i.normal = cross(vec3(dFdx(p)), vec3(dFdy(p)));
-	vec3 K_a = (i.normal + vec3(1.0)) / 2.0;
-    vec3 K_d = K_a;
-    vec3 K_s = vec3(1.0, 1.0, 1.0);
-    float shininess = 10.0;
-    
-    i.color = (i.normal + 1.0) / 2.0;
-
-	return i;
-}
-
 float boxSDF(vec3 p, vec3 b) {
   vec3 d = abs(p) - b;
   return min(max(d.x,max(d.y,d.z)),0.0) + length(max(d,0.0));
-}
-
-Intersection boxSDFIntersection(vec3 p, vec3 b) {
-	Intersection i;
-	i.t = boxSDF(p, b);
-	i.normal = normalize(vec3(
-        boxSDF(vec3(p.x + EPSILON, p.y, p.z), b) - boxSDF(vec3(p.x - EPSILON, p.y, p.z), b),
-        boxSDF(vec3(p.x, p.y + EPSILON, p.z), b) - boxSDF(vec3(p.x, p.y - EPSILON, p.z), b),
-        boxSDF(vec3(p.x, p.y, p.z  + EPSILON), b) - boxSDF(vec3(p.x, p.y, p.z - EPSILON), b)));
-
-	vec3 K_a = (i.normal + vec3(1.0)) / 2.0;
-    vec3 K_d = K_a;
-    vec3 K_s = vec3(1.0, 1.0, 1.0);
-    float shininess = 10.0;
-    
-    i.color = (i.normal + 1.0) / 2.0;
-
-	return i;
 }
 
 float udRoundBox(vec3 p, vec3 b, float r) {
@@ -362,47 +292,171 @@ float sceneSDF(vec3 p) {
 	float wheelSpoke2 = cylinderSDF((rotateY(1.5708) * p) + vec3(-0.9, 0.9, 0.0), 2.7, 0.1);
 	toaster = unionSDF(toaster, unionSDF(wheelSpoke1, wheelSpoke2));
 
-
 	mat3 rotateWheels = rotateX(10.0 * u_Time);
 	float wheel1 = wheelSDF(rotateWheels * (p + vec3(1.0, 0.9, 0.9)));
 	float wheel2 = wheelSDF(rotateWheels * (p + vec3(-1.0, 0.9, -0.9)));
 	float wheel3 = wheelSDF(rotateWheels * (p + vec3(-1.0, 0.9, 0.9)));
 	float wheel4 = wheelSDF(rotateWheels * (p + vec3(1.0, 0.9, -0.9)));
 
-	//float wheelTreads = repeatWheelTreadSDF(p, vec3(0.0, 2.0, 2.0));
-	//wheel1 = unionSDF(wheel1, wheelTreads);
-
 	float wheels = unionSDF(unionSDF(wheel1, wheel2), unionSDF(wheel3, wheel4));
 	toaster = unionSDF(toaster, wheels);
 
 	float toast = animatedToastsSDF(p);
-	float toasterWithToast = unionSDF(toaster, toast);
 
-	//float floor = planeSDF(p + vec3(0.0, 5.0, 0.0), normalize(vec4(0.0, 1.0, 0.0, 1.0)));
-	//float wall1 = planeSDF(p + vec3(15.0, 0.0, 0.0), normalize(vec4(1.0, 0.0, 0.0, 1.0)));
-	//float wall2 = planeSDF(p + vec3(0.0, 0.0, 9.0), normalize(vec4(0.0, 0.0, 1.0, 1.0)));
-	//return unionSDF(unionSDF(floor, unionSDF(wall1, wall2)), toasterWithToast);
-
-	//vec3 specialP = vec3(p.x + u_Time, p.x, p.z);
 	float outlets = repeatOutletSDF(p, vec3(1.5, 0.0, 0.0));
-	return unionSDF(toasterWithToast, outlets);
+	return unionSDF(toaster, outlets);
+}
+
+vec3 estimateSceneNormal(vec3 p) {
+    return normalize(vec3(
+        sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
+        sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
+        sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
+    ));
+}
+
+vec3 estimateToastsNormal(vec3 p) {
+    return normalize(vec3(
+        animatedToastsSDF(vec3(p.x + EPSILON, p.y, p.z)) - animatedToastsSDF(vec3(p.x - EPSILON, p.y, p.z)),
+        animatedToastsSDF(vec3(p.x, p.y + EPSILON, p.z)) - animatedToastsSDF(vec3(p.x, p.y - EPSILON, p.z)),
+        animatedToastsSDF(vec3(p.x, p.y, p.z  + EPSILON)) - animatedToastsSDF(vec3(p.x, p.y, p.z - EPSILON))
+    ));
+}
+
+vec3 phongContribForLight(vec3 k_d, vec3 k_s, float alpha, vec3 p,
+                          vec3 lightPos, vec3 lightIntensity) {
+    vec3 N = estimateSceneNormal(p);
+    vec3 L = normalize(lightPos - p);
+    vec3 V = normalize(eye - p);
+    vec3 R = normalize(reflect(-L, N));
+    
+    float dotLN = dot(L, N);
+    float dotRV = dot(R, V);
+    
+    if (dotLN < 0.0) {
+        return vec3(0.0, 0.0, 0.0);
+    } 
+    
+    if (dotRV < 0.0) {
+        return lightIntensity * (k_d * dotLN); // it's just a lambert
+    }
+    return lightIntensity * (k_d * dotLN + k_s * pow(dotRV, alpha));
+}
+
+
+vec3 toasterPhong(vec3 p) {
+    vec3 k_a = vec3(0.1, 0.1, 0.1);
+    vec3 k_d = vec3(0.5, 0.5, 0.5);
+    vec3 k_s = vec3(1.0, 1.0, 1.0);
+    float shininess = 64.0;
+
+    const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);
+    vec3 color = ambientLight * k_a;
+    
+    vec3 light1Pos = vec3(4.0 * sin(u_Time), 2.0, 4.0 * cos(u_Time));
+    vec3 light1Intensity = vec3(0.4, 0.4, 0.4);
+    
+    color += phongContribForLight(k_d, k_s, shininess, p,
+                                  light1Pos,
+                                  light1Intensity);
+    
+    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time),
+                          2.0 * cos(0.37 * u_Time),
+                          2.0);
+    vec3 light2Intensity = vec3(0.4, 0.4, 0.4);
+    
+    color += phongContribForLight(k_d, k_s, shininess, p,
+                                  light2Pos,
+                                  light2Intensity);    
+    return color;
+}
+
+vec3 lambertContribForLight(vec3 k_d, vec3 p,
+                          vec3 lightPos, vec3 lightIntensity) {
+    vec3 N = estimateToastsNormal(p);
+    vec3 L = normalize(lightPos - p);
+    
+    float dotLN = dot(L, N);
+    
+    if (dotLN < 0.0) {
+        return vec3(0.0, 0.0, 0.0);
+    } 
+
+    return lightIntensity * (k_d * dotLN);
+}
+
+vec3 toastLambert(vec3 p) {
+    vec3 k_a = vec3(0.1, 0.1, 0.1);
+    vec3 k_d = vec3(1.0, 0.8, 0.6);
+    
+    const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);
+    vec3 color = ambientLight * k_a;
+    
+    vec3 light1Pos = vec3(4.0 * sin(u_Time), 2.0, 4.0 * cos(u_Time));
+    vec3 light1Intensity = vec3(0.4, 0.4, 0.4);
+    
+    color += lambertContribForLight(k_d, p, light1Pos, light1Intensity);
+    
+    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time),
+                          2.0 * cos(0.37 * u_Time),
+                          2.0);
+    vec3 light2Intensity = vec3(0.4, 0.4, 0.4);
+    
+    color += lambertContribForLight(k_d, p,
+                                  light2Pos,
+                                  light2Intensity);    
+    return color;
+}
+
+Intersection sceneIntersection(vec3 p) {
+	Intersection i;
+	i.t = sceneSDF(p);
+	i.normal = estimateSceneNormal(p);
+	i.color = toasterPhong(p);
+	i.id = 1;
+
+	return i;
+}
+
+Intersection toastIntersection(vec3 p) {
+	Intersection i;
+	i.t = animatedToastsSDF(p);
+	i.normal = estimateToastsNormal(p);
+	i.color = toastLambert(p);
+	i.id = 2;
+
+	return i;
+}
+
+float toastAndSceneSDF(vec3 p) {
+	return unionSDF(sceneSDF(p), animatedToastsSDF(p));
+}
+
+// returns union of toast and scene
+Intersection toastAndSceneIntersection(vec3 p) {
+	Intersection scene = sceneIntersection(p);
+	Intersection toast = toastIntersection(p);
+
+	Intersection final;
+
+	Intersection minI = scene;
+	if (scene.t > toast.t) {
+		minI = toast;
+	}
+
+	final.t = minI.t;
+	final.normal = minI.normal;
+	final.color = minI.color;
+	final.id = minI.id;
+
+	return final;
 
 }
 
-/**
- * Return the shortest distance from the eyepoint to the scene surface along
- * the marching direction. If no part of the surface is found between start and end,
- * return end.
- * 
- * eye: the eye point, acting as the origin of the ray
- * marchingDirection: the normalized direction to march in
- * start: the starting distance away from the eye
- * end: the max distance away from the ey to march before giving up
- */
 float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end) {
     float depth = start;
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-        float dist = sceneSDF(eye + depth * marchingDirection);
+        float dist = toastAndSceneSDF(eye + depth * marchingDirection);
         if (dist < EPSILON) {
 			return depth;
         }
@@ -414,114 +468,13 @@ float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, f
     return end;
 }
             
-
-/**
- * Return the normalized direction to march in from the eye point for a single pixel.
- * 
- * fieldOfView: vertical field of view in degrees
- * size: resolution of the output image
- * fragCoord: the x,y coordinate of the pixel in the output image
- */
-vec3 rayDirection(float fieldOfView, vec2 size, vec2 fragCoord) {
+vec3 getRayDirection(float fieldOfView, vec2 size, vec2 fragCoord) {
     vec2 xy = fragCoord - size / 2.0;
     float z = size.y / tan(radians(fieldOfView) / 2.0);
     return normalize(vec3(xy, -z));
 }
 
-/**
- * Using the gradient of the SDF, estimate the normal on the surface at point p.
- */
-vec3 estimateNormal(vec3 p) {
-    return normalize(vec3(
-        sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
-        sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
-        sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
-    ));
-}
-
-/**
- * Lighting contribution of a single point light source via Phong illumination.
- * 
- * The vec3 returned is the RGB color of the light's contribution.
- *
- * k_a: Ambient color
- * k_d: Diffuse color
- * k_s: Specular color
- * alpha: Shininess coefficient
- * p: position of point being lit
- * eye: the position of the camera
- * lightPos: the position of the light
- * lightIntensity: color/intensity of the light
- *
- * See https://en.wikipedia.org/wiki/Phong_reflection_model#Description
- */
-vec3 phongContribForLight(vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 eye,
-                          vec3 lightPos, vec3 lightIntensity) {
-    vec3 N = estimateNormal(p);
-    vec3 L = normalize(lightPos - p);
-    vec3 V = normalize(eye - p);
-    vec3 R = normalize(reflect(-L, N));
-    
-    float dotLN = dot(L, N);
-    float dotRV = dot(R, V);
-    
-    if (dotLN < 0.0) {
-        // Light not visible from this point on the surface
-        return vec3(0.0, 0.0, 0.0);
-    } 
-    
-    if (dotRV < 0.0) {
-        // Light reflection in opposite direction as viewer, apply only diffuse
-        // component
-        return lightIntensity * (k_d * dotLN);
-    }
-    return lightIntensity * (k_d * dotLN + k_s * pow(dotRV, alpha));
-}
-
-/**
- * Lighting via Phong illumination.
- * 
- * The vec3 returned is the RGB color of that point after lighting is applied.
- * k_a: Ambient color
- * k_d: Diffuse color
- * k_s: Specular color
- * alpha: Shininess coefficient
- * p: position of point being lit
- * eye: the position of the camera
- *
- * See https://en.wikipedia.org/wiki/Phong_reflection_model#Description
- */
-vec3 phongIllumination(vec3 k_a, vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 eye) {
-    const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);
-    vec3 color = ambientLight * k_a;
-    
-    vec3 light1Pos = vec3(4.0 * sin(u_Time), 2.0, 4.0 * cos(u_Time));
-    vec3 light1Intensity = vec3(0.4, 0.4, 0.4);
-    
-    color += phongContribForLight(k_d, k_s, alpha, p, eye,
-                                  light1Pos,
-                                  light1Intensity);
-    
-    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time),
-                          2.0 * cos(0.37 * u_Time),
-                          2.0);
-    vec3 light2Intensity = vec3(0.4, 0.4, 0.4);
-    
-    color += phongContribForLight(k_d, k_s, alpha, p, eye,
-                                  light2Pos,
-                                  light2Intensity);    
-    return color;
-}
-
-
-/**
- * Return a transform matrix that will transform a ray from view space
- * to world coordinates, given the eye point, the camera target, and an up vector.
- *
- * This assumes that the center of the camera is aligned with the negative z axis in
- * view space when calculating the ray marching direction. See rayDirection.
- */
-mat4 viewMatrix(vec3 eye, vec3 center, vec3 up) {
+mat4 getViewMatrix(vec3 eye, vec3 center, vec3 up) {
     // Based on gluLookAt man page
     vec3 f = normalize(center - eye);
     vec3 s = normalize(cross(f, up));
@@ -534,52 +487,63 @@ mat4 viewMatrix(vec3 eye, vec3 center, vec3 up) {
     );
 }
 
-float rect(vec2 r, vec2 bottomLeft, vec2 topRight) {
-	float ret;
-	float d = 0.005;
-	ret = smoothstep(bottomLeft.x-d, bottomLeft.x+d, r.x);
-	ret *= smoothstep(bottomLeft.y-d, bottomLeft.y+d, r.y);
-	ret *= 1.0 - smoothstep(topRight.y-d, topRight.y+d, r.y);
-	ret *= 1.0 - smoothstep(topRight.x-d, topRight.x+d, r.x);
-	return ret;
+mat2 rotate2D(float angle) { 
+    return mat2(cos(angle), -sin(angle), sin(angle), cos(angle)); 
 }
 
-
 void main() {
+    // frag coord now represents window width/height
 	vec2 fragCoord = ((fs_Pos.xy + 1.0) / 2.0) * u_AspectRatio.xy;
 	
-	vec3 viewDir = rayDirection(45.0, u_AspectRatio.xy, fragCoord);
+	vec3 viewDir = getRayDirection(45.0, u_AspectRatio.xy, fragCoord);
     
-    mat4 viewToWorld = viewMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
+    mat4 viewToWorld = getViewMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     
     float dist = shortestDistanceToSurface(eye, worldDir, MIN_DIST, MAX_DIST);
 
     if (dist > MAX_DIST - EPSILON) {
-        // Didn't hit anything
-		// background
-		out_Col = vec4(0.0, 0.0, 0.0, 1.0);
+        // Didn't hit anything so show background
+
+        vec2 pos = (fragCoord.xy - 0.5 * u_AspectRatio.xy) / u_AspectRatio.y;
+        vec2 rotatedPos = rotate2D(-0.2) * pos;
+                    
+        float xMax = 0.5 * u_AspectRatio.x / u_AspectRatio.y;
+        
+        // simulate moving stripes in bg
+        float stripesMask = step(0.25, mod(rotatedPos.x - u_Time, 0.5));
+        
+        vec3 stripeColor = vec3(0.7, 0.5, 0.2);
+        vec3 frag = stripeColor;
+
+        frag -= 0.1 * stripesMask;	
+        frag -= smoothstep(0.45, 2.5, length(pos));
+
+        out_Col = vec4(vec3(frag), 1.0);
 		return;
 	}
     
     // The closest point on the surface to the eyepoint along the view ray
     vec3 p = eye + dist * worldDir;
 
-	vec3 K_a = vec3(0.1, 0.1, 0.1);
-    vec3 K_d = vec3(0.5, 0.5, 0.5);
-    vec3 K_s = vec3(1.0, 1.0, 1.0);
-    float shininess = 64.0;
-    
-    vec3 color = phongIllumination(K_a, K_d, K_s, shininess, p, eye);
+    // get intersection of entire scene
+	Intersection i = toastAndSceneIntersection(p);
+	
+    // get color
+	vec3 color = i.color;
 
+	// NOW LET'S REFLECT THAT RAY (but not for the toast)
+	//if (i.id == 1) { // use ID to see if toast or not 
+		worldDir = reflect(worldDir, i.normal); // reflect ray
+        // send off from intersection point
+		dist = shortestDistanceToSurface(p + worldDir * 0.001, worldDir, MIN_DIST, MAX_DIST);
+        // calculate new point of intersection
+		p = (p + worldDir * 0.001) + dist * worldDir;
+		i = toastAndSceneIntersection(p);
 
-	// NOW LET'S REFLECT THAT RAY
-	worldDir = reflect(worldDir, estimateNormal(p));
-	dist = shortestDistanceToSurface(p + worldDir * 0.001, worldDir, MIN_DIST, MAX_DIST);
-
-    p = (p + worldDir * 0.001) + dist * worldDir;
-
-	color += phongIllumination(K_a, K_d, K_s, shininess, p, eye) * 0.35;    
+        // add reflection color
+		color += i.color * 0.35; 
+	//}
     
     out_Col = vec4(color, 1.0);
 
