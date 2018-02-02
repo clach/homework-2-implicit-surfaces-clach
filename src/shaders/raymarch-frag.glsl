@@ -346,7 +346,7 @@ vec3 phongContribForLight(vec3 k_d, vec3 k_s, float alpha, vec3 p,
 
 vec3 toasterPhong(vec3 p) {
     vec3 k_a = vec3(0.1, 0.1, 0.1);
-    vec3 k_d = vec3(0.5, 0.5, 0.5);
+    vec3 k_d = vec3(0.65, 0.65, 0.65);
     vec3 k_s = vec3(1.0, 1.0, 1.0);
     float shininess = 64.0;
 
@@ -506,7 +506,7 @@ void main() {
         // Didn't hit anything so show background
 
         vec2 pos = (fragCoord.xy - 0.5 * u_AspectRatio.xy) / u_AspectRatio.y;
-        vec2 rotatedPos = rotate2D(-0.2) * pos;
+        vec2 rotatedPos = rotate2D(0.6) * pos;
                     
         float xMax = 0.5 * u_AspectRatio.x / u_AspectRatio.y;
         
