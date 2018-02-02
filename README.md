@@ -3,8 +3,10 @@ https://github.com/CIS-566-2018/homework-2-ray-marching-implicit-surfaces
 
 ## Caroline Lachanski's Results:
 I got my link actually working :')
+
 But I couldn't figure out how to make the toast non-shiny :'(
 https://clach.github.io/homework-2-implicit-surfaces-clach/
+![](Screen Shot 2018-02-01 at 11.38.05 PM.png)
 
 ## Objective
 - Gain more experience with GLSL Shader writing and raymarching
