@@ -14,6 +14,10 @@ const float MAX_DIST = 100.0;
 const float EPSILON = 0.0001;
 
 const vec3 eye = vec3(12.0, 8.0, 10.0);
+const vec3 light1Pos = vec3(6.0, 7.0, 6.0);
+const vec3 light2Pos = vec3(-2.0, 7.0, -2.0);
+
+
 
 struct Intersection {
 	float t;
@@ -187,39 +191,27 @@ float toasterBodySDF(vec3 p) {
 	
 	toaster = unionSDF(toaster, leverHandle);
 
-	float dial = cylinderSDF(rotateZ(-0.61) * (p + vec3(-0.65, 0.6, -1.95)), 0.3, 0.2);
-	float dialHandle = boxSDF(rotateZ(-0.61) * (p + vec3(-0.65, 0.6, -2.05)), vec3(0.18, 0.02, 0.2));
+    float dialAngle = -floor(u_Time);
+	float dial = cylinderSDF(rotateZ(dialAngle) * (p + vec3(-0.65, 0.6, -1.95)), 0.3, 0.2);
+	float dialHandle = boxSDF(rotateZ(dialAngle) * (p + vec3(-0.65, 0.6, -2.05)), vec3(0.18, 0.02, 0.2));
 	dial = smoothUnionSDF(dial, dialHandle);
 
 	toaster = unionSDF(toaster, dial);
-
-	float plugHead = ellipsoidSDF(p + vec3(-0.75, 0.4, 4.9), vec3(0.35, 0.3, 0.5));
-	float plugHeadSubtract = boxSDF(p + vec3(-0.75, 0.4, 5.3), vec3(0.5, 0.5, 0.4));
-	plugHead = differenceSDF(plugHead, plugHeadSubtract);
-	float plugHeadIntersect = boxSDF(p + vec3(-0.75, 0.4, 4.6), vec3(0.5, 0.25, 0.9));
-	plugHead = intersectSDF(plugHead, plugHeadIntersect);
-	float plugCord = cylinderSDF(p + vec3(-0.75, 0.4, 3.5), 3.0, 0.08);
-	float plug = smoothUnionSDF(plugHead, plugCord);
-	toaster = unionSDF(toaster, plug);
 
 	return toaster;
 }
 
 float wheelSDF(vec3 p) {
-	return cylinderSDF(rotateY(1.5708) * p, 0.5, 0.5);
-}
-
-float wheelTreadSDF(vec3 p) {
-	return cylinderSDF((rotateY(1.5708) * p) + vec3(0.9, 0.9, 0.0), 3.0, 0.05);
+    float wheel = cylinderSDF(rotateY(1.5708) * p, 0.5, 0.5);
+    wheel = differenceSDF(wheel, cylinderSDF(rotateY(1.5708) * p, 0.6, 0.4));
+    float spoke1 = boxSDF(p, vec3(0.25, 0.05, 0.5));
+    float spoke2 = boxSDF(rotateX(1.0472) * p, vec3(0.25, 0.05, 0.5));
+    float spoke3 = boxSDF(rotateX(2.094) * p, vec3(0.25, 0.05, 0.5));
+	return unionSDF(wheel, smoothUnionSDF(spoke1, smoothUnionSDF(spoke2, spoke3)));
 }
 
 vec3 mod3(vec3 p, vec3 c) {
 	return vec3(mod(p.x, c.x), mod(p.y, c.y), mod(p.z, c.z));
-}
-
-float repeatWheelTreadSDF(vec3 p, vec3 c) {
-	vec3 q = mod3(p, c) - 0.5 * c;
-    return wheelTreadSDF(rotateX(0.1) * q);
 }
 
 float planeSDF(vec3 p, vec4 n){
@@ -274,7 +266,7 @@ float repeatOutletSDF(vec3 p, vec3 c) {
 
 float animatedToastsSDF(vec3 p) {
 	float PI = 3.14159;
-	float x = fract(u_Time) * (2.0 * PI);
+	float x = fract(u_Time) * (2.0 * PI);    
 	float toastHeight = 1.0 + -((2.0*floor(x/(2.0*PI)) - floor(2.0*(x/(2.0*PI))) + 1.0)*(sin(-(x-(PI/2.0)))+1.0) + 
 		2.0*fract(x/(PI / 2.0)) * (2.0*floor((x-PI)/(2.0*PI)) - floor(2.0*((x-PI)/(2.0*PI))) + 1.0) * 
 		(2.0*floor((x+(PI/2.0))/(PI)) - floor(2.0*((x+(PI/2.0))/(PI))) + 1.0));
@@ -285,14 +277,23 @@ float animatedToastsSDF(vec3 p) {
 }
 
 float sceneSDF(vec3 p) {
-	float toasterBodyJitter = 0.03 * sin(u_Time * 125.0);
-	float toaster = toasterBodySDF(p + vec3(0.0, 0.0, toasterBodyJitter));
+	float toasterBodyJitter = 0.03 * sin(u_Time * 80.0);
+	float toaster = toasterBodySDF(p + vec3(0.0, toasterBodyJitter, 0.0));
 
-	float wheelSpoke1 = cylinderSDF((rotateY(1.5708) * p) + vec3(0.9, 0.9, 0.0), 2.7, 0.1);
-	float wheelSpoke2 = cylinderSDF((rotateY(1.5708) * p) + vec3(-0.9, 0.9, 0.0), 2.7, 0.1);
-	toaster = unionSDF(toaster, unionSDF(wheelSpoke1, wheelSpoke2));
+    float plugHead = ellipsoidSDF(p + vec3(-0.75, 0.4, 4.9), vec3(0.35, 0.3, 0.5));
+	float plugHeadSubtract = boxSDF(p + vec3(-0.75, 0.4, 5.3), vec3(0.5, 0.5, 0.4));
+	plugHead = differenceSDF(plugHead, plugHeadSubtract);
+	float plugHeadIntersect = boxSDF(p + vec3(-0.75, 0.4, 4.6), vec3(0.5, 0.25, 0.9));
+	plugHead = intersectSDF(plugHead, plugHeadIntersect);
+	float plugCord = cylinderSDF(p + vec3(-0.75, 0.4, 3.5), 3.0, 0.08);
+	float plug = smoothUnionSDF(plugHead, plugCord);
+	toaster = unionSDF(toaster, plug);
 
-	mat3 rotateWheels = rotateX(10.0 * u_Time);
+	float wheelAxel1 = cylinderSDF((rotateY(1.5708) * p) + vec3(0.9, 0.9, 0.0), 2.7, 0.1);
+	float wheelAxel2 = cylinderSDF((rotateY(1.5708) * p) + vec3(-0.9, 0.9, 0.0), 2.7, 0.1);
+	toaster = unionSDF(toaster, unionSDF(wheelAxel1, wheelAxel2));
+
+	mat3 rotateWheels = rotateX(5.0 * u_Time);
 	float wheel1 = wheelSDF(rotateWheels * (p + vec3(1.0, 0.9, 0.9)));
 	float wheel2 = wheelSDF(rotateWheels * (p + vec3(-1.0, 0.9, -0.9)));
 	float wheel3 = wheelSDF(rotateWheels * (p + vec3(-1.0, 0.9, 0.9)));
@@ -346,23 +347,19 @@ vec3 phongContribForLight(vec3 k_d, vec3 k_s, float alpha, vec3 p,
 
 vec3 toasterPhong(vec3 p) {
     vec3 k_a = vec3(0.1, 0.1, 0.1);
-    vec3 k_d = vec3(0.65, 0.65, 0.65);
+    vec3 k_d = vec3(0.98, 0.98, 0.98);
     vec3 k_s = vec3(1.0, 1.0, 1.0);
     float shininess = 64.0;
 
     const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);
     vec3 color = ambientLight * k_a;
     
-    vec3 light1Pos = vec3(4.0 * sin(u_Time), 2.0, 4.0 * cos(u_Time));
     vec3 light1Intensity = vec3(0.4, 0.4, 0.4);
     
     color += phongContribForLight(k_d, k_s, shininess, p,
                                   light1Pos,
                                   light1Intensity);
     
-    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time),
-                          2.0 * cos(0.37 * u_Time),
-                          2.0);
     vec3 light2Intensity = vec3(0.4, 0.4, 0.4);
     
     color += phongContribForLight(k_d, k_s, shininess, p,
@@ -386,20 +383,21 @@ vec3 lambertContribForLight(vec3 k_d, vec3 p,
 }
 
 vec3 toastLambert(vec3 p) {
+    float PI = 3.14159;
+	float x = fract(u_Time) * (2.0 * PI);
+    float toastColor = fract(x / (PI)) * (2.0*floor((x + PI) /(2.0*PI)) - floor(2.0*((x + PI)/(2.0*PI))) + 1.0);
+    vec3 lightBrown = vec3(1.0, 0.8, 0.6);
+    vec3 darkBrown = vec3(0.3, 0.24, 0.18);
     vec3 k_a = vec3(0.1, 0.1, 0.1);
-    vec3 k_d = vec3(1.0, 0.8, 0.6);
+    vec3 k_d = mix(lightBrown, darkBrown, toastColor);
     
     const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);
     vec3 color = ambientLight * k_a;
     
-    vec3 light1Pos = vec3(4.0 * sin(u_Time), 2.0, 4.0 * cos(u_Time));
     vec3 light1Intensity = vec3(0.4, 0.4, 0.4);
     
     color += lambertContribForLight(k_d, p, light1Pos, light1Intensity);
     
-    vec3 light2Pos = vec3(2.0 * sin(0.37 * u_Time),
-                          2.0 * cos(0.37 * u_Time),
-                          2.0);
     vec3 light2Intensity = vec3(0.4, 0.4, 0.4);
     
     color += lambertContribForLight(k_d, p,
@@ -444,19 +442,21 @@ Intersection toastAndSceneIntersection(vec3 p) {
 		minI = toast;
 	}
 
+    /*
 	final.t = minI.t;
 	final.normal = minI.normal;
 	final.color = minI.color;
-	final.id = minI.id;
+	final.id = minI.id;*/
+    final = minI;
 
 	return final;
 
 }
 
-float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end) {
+float shortestDistanceToSurface(vec3 origin, vec3 marchingDirection, float start, float end) {
     float depth = start;
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-        float dist = toastAndSceneSDF(eye + depth * marchingDirection);
+        float dist = toastAndSceneSDF(origin + depth * marchingDirection);
         if (dist < EPSILON) {
 			return depth;
         }
@@ -513,7 +513,7 @@ void main() {
         // simulate moving stripes in bg
         float stripesMask = step(0.25, mod(rotatedPos.x - u_Time, 0.5));
         
-        vec3 stripeColor = vec3(0.7, 0.5, 0.2);
+        vec3 stripeColor = vec3(0.3, 0.6, 0.7);
         vec3 frag = stripeColor;
 
         frag -= 0.1 * stripesMask;	
@@ -533,7 +533,7 @@ void main() {
 	vec3 color = i.color;
 
 	// NOW LET'S REFLECT THAT RAY (but not for the toast)
-	//if (i.id == 1) { // use ID to see if toast or not 
+	if (i.id == 1) { // use ID to see if toast or not 
 		worldDir = reflect(worldDir, i.normal); // reflect ray
         // send off from intersection point
 		dist = shortestDistanceToSurface(p + worldDir * 0.001, worldDir, MIN_DIST, MAX_DIST);
@@ -543,7 +543,7 @@ void main() {
 
         // add reflection color
 		color += i.color * 0.35; 
-	//}
+	}
     
     out_Col = vec4(color, 1.0);
 
