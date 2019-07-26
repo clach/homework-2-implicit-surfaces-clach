@@ -385,10 +385,6 @@ vec3 lambertContribForLight(vec3 k_d, vec3 p,
 vec3 toastLambert(vec3 p) {
     float PI = 3.14159;
 	float x = fract(u_Time) * (2.0 * PI);
-    /*
-    float toastHeight = 1.0 + -((2.0*floor(x/(2.0*PI)) - floor(2.0*(x/(2.0*PI))) + 1.0)*(sin(-(x-(PI/2.0)))+1.0) + 
-		2.0*fract(x/(PI / 2.0)) * (2.0*floor((x-PI)/(2.0*PI)) - floor(2.0*((x-PI)/(2.0*PI))) + 1.0) * 
-		(2.0*floor((x+(PI/2.0))/(PI)) - floor(2.0*((x+(PI/2.0))/(PI))) + 1.0));*/
     float toastColor = fract(x / (PI)) * (2.0*floor((x + PI) /(2.0*PI)) - floor(2.0*((x + PI)/(2.0*PI))) + 1.0);
     vec3 lightBrown = vec3(1.0, 0.8, 0.6);
     vec3 darkBrown = vec3(0.3, 0.24, 0.18);
@@ -446,10 +442,12 @@ Intersection toastAndSceneIntersection(vec3 p) {
 		minI = toast;
 	}
 
+    /*
 	final.t = minI.t;
 	final.normal = minI.normal;
 	final.color = minI.color;
-	final.id = minI.id;
+	final.id = minI.id;*/
+    final = minI;
 
 	return final;
 
@@ -527,7 +525,6 @@ void main() {
     
     // The closest point on the surface to the eyepoint along the view ray
     vec3 p = eye + dist * worldDir;
-
 
     // get intersection of entire scene
 	Intersection i = toastAndSceneIntersection(p);
